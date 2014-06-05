@@ -1,11 +1,72 @@
 <div class="container">
-  <form class="form-signin" role="form">
-    <h2 class="form-signin-heading">Please login in</h2>
-    <input type="email" class="form-control" placeholder="Email address" required autofocus>
-    <input type="password" class="form-control" placeholder="Password" required>
-    <label class="checkbox">
-      <input type="checkbox" value="remember-me"> Remember me
-    </label>
-    <a class="btn btn-lg btn-primary btn-block" href="/app/#/main">Login</a>
-  </form>
+	<form class="form-login" role="form">
+		<h2 class="form-login-heading">Login in</h2> 
+		or <a ng-click="open()" href="">Create an account</a>
+		<input type="email" class="form-control" placeholder="Email address" required autofocus>
+		<input type="password" class="form-control" placeholder="Password" required>
+		<label class="checkbox">
+			<input type="checkbox" value="remember-me"> Remember me
+		</label>
+		<a class="btn btn-lg btn-primary btn-block" href="#/main">Login</a>
+
+		<a>Forgot password?</a>
+	</form>
 </div> <!-- /container -->
+
+<script type="text/ng-template" id="forgotPassword.html">
+	<div class="modal-header">
+		<h3 class="modal-title">Creat your account</h3>
+	</div>
+
+	<form class="form-horizontal" role="form" name="registerForm">
+		<div class="modal-body">
+			<!-- Email -->
+			<div class="form-group">
+				<label for="inputEmail" class="col-sm-4 control-label">Email</label>
+				<div class="col-sm-5">
+					<input type="email" class="form-control" id="inputEmail" placeholder="Email">
+				</div>
+			</div>
+
+			<!-- First Name -->
+			<div class="form-group">
+				<label for="inputFirstName" class="col-sm-4 control-label">First Name</label>
+				<div class="col-sm-5">
+					<input type="text" class="form-control" id="inputFirstName" placeholder="First Name">
+				</div>
+			</div>
+
+			<!-- Last Name -->
+			<div class="form-group">
+				<label for="inputLastName" class="col-sm-4 control-label">Last Name</label>
+				<div class="col-sm-5">
+					<input type="text" class="form-control" id="inputLastName" placeholder="Last Name">
+				</div>
+			</div>
+
+			<!-- Password -->
+			<div class="form-group">
+				<label for="inputPassword" class="col-sm-4 control-label">Password</label>
+				<div class="col-sm-5">
+					<input type="password" class="form-control" id="inputPassword" placeholder="Password">
+				</div>
+			</div>
+
+			<!-- Confirm Password -->
+			<div class="form-group">
+				<label for="inputConfirmPassword" class="col-sm-4 control-label">Confirm Password</label>
+				<div class="col-sm-5">
+					<input type="password" class="form-control" id="inputConfirmPassword" placeholder="Confirm Password">
+				</div>
+			</div>
+		</div>
+		<div class="modal-footer">
+			<div class="form-group">
+				<div class="col-sm-4">
+					<button class="btn btn-primary" ng-click="ok()">Create</button>
+					<button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+				</div>
+			</div>
+		</div>
+	</form>
+</script>
