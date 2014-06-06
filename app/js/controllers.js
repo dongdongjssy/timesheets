@@ -25,7 +25,8 @@ var LoginController = function($scope, $modal) {
 	};
 };
 
-var CreateAccountModalController = function ($scope, $modalInstance, $http) {
+/* Create Account Modal Controller */
+var CreateAccountModalController = function ($scope, $modalInstance) {
 	$scope.create = function () {
 		var newPerson = {
 			Email: $('#inputEmail').val(),
@@ -34,33 +35,48 @@ var CreateAccountModalController = function ($scope, $modalInstance, $http) {
 			Password: $('#inputPassword').val(),
 			ConfirmPassword: $('#inputConfirmPassword').val()
 		};
+		var formData = JSON.stringify(newPerson);
 
-		$http.post(
-			'http://192.168.0.153/TimesheetsWebAPI/Help/Api/POST-api-Account-Register',
-			JSON.stringify(newPerson)).success(function(data, status){
-				console.log(data);
-			});
+		$.ajax({
+			type: "POST",
+			contentType: "application/json; charset=utf-8",
+			url: "http://192.168.0.153/TimesheetsWebAPI/api/Account/Register",
+			data: formData,
+			success: function(data, textStatus, jqXHR){
+				$modalInstance.close();
+			},
+			error: function(data, textStatus, errorThrown) {
+				var errors = [];
+				for (var key in data.responseJSON.ModelState) {
+					for (var i = 0; i < data.responseJSON.ModelState[key].length; i++) {
+						errors.push(data.responseJSON.ModelState[key][i]);
+					}
+				}
+				//var obj = data.responseJSON.ModelState;
+				//console.log(obj.length);
+				$scope.errors = errors;
+				console.log($scope.errors);
+			}
+		});
+	};
 
-    //$modalInstance.close();
-  };
-
-  $scope.cancelCreate = function () {
-  	$modalInstance.dismiss('cancel');
-  };
+	$scope.cancelCreate = function () {
+		$modalInstance.dismiss('cancel');
+	};
 };
 
+/* Forgot Password Modal Controller */
 var ForgotPasswordModalController = function ($scope, $modalInstance, $http) {
 	$scope.sendEmail = function () {
-    $modalInstance.close();
-  };
+		$modalInstance.close();
+	};
 
-  $scope.cancelSend = function () {
-  	$modalInstance.dismiss('cancel');
-  };
+	$scope.cancelSend = function () {
+		$modalInstance.dismiss('cancel');
+	};
 };
 
-/* Forgot Password Controller */
-
+/* Main Controller */
 var MainController = function ($scope) {
 	$scope.myData = [{name: "Moroni", age: 50},
 	{name: "Tiancum", age: 43},

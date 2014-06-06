@@ -24,6 +24,12 @@
 
 	<form class="form-horizontal" role="form" name="registerForm">
 		<div class="modal-body">
+			<ul class="errors">
+				<li ng-repeat="error in errors">
+					{{error}}
+				</li>
+			</ul>
+
 			<!-- Email -->
 			<div class="form-group">
 				<label for="inputEmail" class="col-sm-4 control-label">Email</label>

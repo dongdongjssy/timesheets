@@ -1,14 +1,24 @@
 <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="#">Time Sheets</a>
+      <label class="navbar-brand">Time Sheets</label>
     </div>
     <div class="navbar-collapse collapse">
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#/main">Dashboard</a></li>
-        <li><a href="#/settings">Settings</a></li>
-        <li><a href="#/profile">Profile</a></li>
-        <li><a href="#/help">Help</a></li>
+        <li class="profile-img">
+          <i class="fa fa-user fa-2x fa-inverse"></i>
+        </li>
+        <li class="dropdown">
+          <a id="userInfo" role="button" data-toggle="dropdown" href="">
+            Administrator&nbsp;<b class="caret"></b>
+          </a>
+          <ul id="userInfoMenu" class="dropdown-menu" role="menu" aria-labelledby="userInfoMenu">
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="">Profile</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="">Setting</a></li>
+            <li role="presentation" class="divider"></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="">Sign out</a></li>
+          </ul>
+        </li>
       </ul>
       <form class="navbar-form navbar-right">
         <input type="text" class="form-control" placeholder="Search...">
