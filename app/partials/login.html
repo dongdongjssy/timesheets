@@ -1,19 +1,23 @@
-<div class="container">
+<div class="login-body">
 	<form class="form-login" role="form">
-		<h2 class="form-login-heading">Login in</h2> 
-		or <a ng-click="open()" href="">Create an account</a>
-		<input type="email" class="form-control" placeholder="Email address" required autofocus>
-		<input type="password" class="form-control" placeholder="Password" required>
-		<label class="checkbox">
-			<input type="checkbox" value="remember-me"> Remember me
-		</label>
-		<a class="btn btn-lg btn-primary btn-block" href="#/main">Login</a>
+		<div class="form-login-header">
+			<h1>Sign in</h1>
+		</div> 
 
-		<a>Forgot password?</a>
+		<div class="form-login-body">
+			<label>Email</label>
+			<input type="email" class="form-control" placeholder="Email address" required autofocus>
+			<label>Password</label><a ng-click="openForgotPasswordModal()" href=""> (forgot password?)</a>
+			<input type="password" class="form-control" placeholder="Password" required>
+			
+			<a class="btn btn-default login-btn" href="#/main">Sign in</a>&nbsp;Or&nbsp;
+			<a ng-click="openCreateAccountModal()" href="">Create an account</a>
+		</div>
 	</form>
 </div> <!-- /container -->
 
-<script type="text/ng-template" id="forgotPassword.html">
+<!-- create new account modal -->
+<script type="text/ng-template" id="createAccount.html">
 	<div class="modal-header">
 		<h3 class="modal-title">Creat your account</h3>
 	</div>
@@ -62,10 +66,33 @@
 		</div>
 		<div class="modal-footer">
 			<div class="form-group">
-				<div class="col-sm-4">
-					<button class="btn btn-primary" ng-click="ok()">Create</button>
-					<button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+					<button class="btn btn-primary" ng-click="create()">Create</button>
+					<button class="btn btn-default" ng-click="cancelCreate()">Cancel</button>
+			</div>
+		</div>
+	</form>
+</script>
+
+<!-- forgot password modal -->
+<script type="text/ng-template" id="forgotPassword.html">
+	<div class="modal-header">
+		<h3 class="modal-title">Find your password</h3>
+	</div>
+
+	<form class="form-horizontal" role="form" name="registerForm">
+		<div class="modal-body">
+			<!-- Email -->
+			<div class="form-group">
+				<div class="col-sm-8">
+					<label for="forgotPasswordEmail" class="control-label">Your Email</label>
+					<input type="email" class="form-control" id="forgotPasswordEmail" placeholder="Please type your Email address...">
 				</div>
+			</div>
+		</div>
+		<div class="modal-footer">
+			<div class="form-group">
+					<button class="btn btn-primary" ng-click="sendEmail()">Send</button>
+					<button class="btn btn-default" ng-click="cancelSend()">Cancel</button>
 			</div>
 		</div>
 	</form>

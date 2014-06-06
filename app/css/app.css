@@ -34,3 +34,55 @@
   width: 400px; 
   height: 300px;
 }
+
+/* login page */
+.login-body {
+  max-width: 400px;
+  border-radius: 4px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.075);
+  margin: auto;
+}
+
+.form-login .form-login-header{
+  background-color: #3276b1;
+  color: #ffffff;
+  padding: 10px 20px;
+  text-shadow: 0 -1px 0 rgba(0,0,0,0.5);
+  border: 1px solid #3276b3;
+  border-radius: 4px 4px 0 0;
+}
+
+.form-login-header h1 {
+  font-size: 20px;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.form-login .form-login-body {
+  padding: 20px;
+  border: 1px solid #d8dee2;
+  border-top-color: #eee;
+  border-radius: 0 0 4px 4px;
+  background-color: #eee;
+}
+
+.form-login-body .login-btn,
+.form-login-body .form-control {
+    margin-bottom: 15px;
+    margin-top: 5px;
+}
+
+.form-login-body .form-control {
+  position: relative;
+  height: auto;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.login-btn {
+  background-color: #dddddd;
+  background-image: linear-gradient(#eee, #ddd);
+  border-color: #ccc;
+}
+

@@ -6,18 +6,27 @@ var timesheetsControllers = angular.module('timesheetsApp.controllers', []);
 
 /* Login Controller */
 var LoginController = function($scope, $modal) {
-	$scope.open = function() {
+	$scope.openCreateAccountModal = function() {
+		var modalInstance = $modal.open({
+			templateUrl: 'createAccount.html',
+			controller: CreateAccountModalController,
+			keyboard: false, // hitting ESC key will not close the modal
+			backdrop: 'static' // modal window is ont closed when clicking outside of the modal window
+		});
+	};
+
+	$scope.openForgotPasswordModal = function() {
 		var modalInstance = $modal.open({
 			templateUrl: 'forgotPassword.html',
-			controller: ModalInstanceController,
+			controller: ForgotPasswordModalController,
 			keyboard: false, // hitting ESC key will not close the modal
 			backdrop: 'static' // modal window is ont closed when clicking outside of the modal window
 		});
 	};
 };
 
-var ModalInstanceController = function ($scope, $modalInstance, $http) {
-	$scope.ok = function () {
+var CreateAccountModalController = function ($scope, $modalInstance, $http) {
+	$scope.create = function () {
 		var newPerson = {
 			Email: $('#inputEmail').val(),
 			FirstName: $('#inputFirstName').val(),
@@ -35,10 +44,22 @@ var ModalInstanceController = function ($scope, $modalInstance, $http) {
     //$modalInstance.close();
   };
 
-  $scope.cancel = function () {
+  $scope.cancelCreate = function () {
   	$modalInstance.dismiss('cancel');
   };
 };
+
+var ForgotPasswordModalController = function ($scope, $modalInstance, $http) {
+	$scope.sendEmail = function () {
+    $modalInstance.close();
+  };
+
+  $scope.cancelSend = function () {
+  	$modalInstance.dismiss('cancel');
+  };
+};
+
+/* Forgot Password Controller */
 
 var MainController = function ($scope) {
 	$scope.myData = [{name: "Moroni", age: 50},
