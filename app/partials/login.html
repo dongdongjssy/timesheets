@@ -19,61 +19,171 @@
 <!-- create new account modal -->
 <script type="text/ng-template" id="createAccount.html">
 	<div class="modal-header">
+		<button type="button" class="close" aria-hidden="true" ng-click="cancelCreate()">&times;</button>
 		<h3 class="modal-title">Creat your account</h3>
 	</div>
 
-	<form class="form-horizontal" role="form" name="registerForm">
+	<form class="form-horizontal" role="form" name="registerForm" ng-submit="create()" novalidate>
 		<div class="modal-body">
-			<ul class="errors">
-				<li ng-repeat="error in errors">
-					{{error}}
-				</li>
-			</ul>
+			<div class="error" ng-hide="errors | isEmpty">
+				<ul>
+					<li ng-repeat="error in errors">
+						{{error}}
+					</li>
+				</ul>
+			</div>
 
 			<!-- Email -->
-			<div class="form-group">
-				<label for="inputEmail" class="col-sm-4 control-label">Email</label>
-				<div class="col-sm-5">
-					<input type="email" class="form-control" id="inputEmail" placeholder="Email">
+			<div class="form-group has-feedback" 
+				ng-class="{ 
+					'has-error' : registerForm.inputEmail.$invalid && registerForm.inputEmail.$dirty, 
+					'has-success':registerForm.inputEmail.$valid && registerForm.inputEmail.$dirty 
+				}">
+				<label for="inputEmail" class="col-md-4 control-label">Email</label>
+				<div class="col-md-5">
+					<input type="email" class="form-control" id="inputEmail" name="inputEmail" placeholder="Email" ng-model="register.email" required>
+					<span class="glyphicon glyphicon-ok form-control-feedback" 
+						ng-show="registerForm.inputEmail.$valid && registerForm.inputEmail.$dirty"></span>
+					<span class="glyphicon glyphicon-remove form-control-feedback" 
+						ng-show="registerForm.inputEmail.$invalid && registerForm.inputEmail.$dirty"></span>
 				</div>
+
+				<span class="validation-error-message">
+					<span ng-show="registerForm.inputEmail.$error.required && registerForm.inputEmail.$dirty">
+						Required!
+					</span>
+					<span ng-show="registerForm.inputEmail.$error.email">
+						Not valid email!
+					</span>
+				</span>
 			</div>
 
 			<!-- First Name -->
-			<div class="form-group">
-				<label for="inputFirstName" class="col-sm-4 control-label">First Name</label>
-				<div class="col-sm-5">
-					<input type="text" class="form-control" id="inputFirstName" placeholder="First Name">
+			<div class="form-group has-feedback" 
+				ng-class="{ 
+					'has-error' : registerForm.inputFirstName.$invalid && registerForm.inputFirstName.$dirty, 
+					'has-success':registerForm.inputFirstName.$valid && registerForm.inputFirstName.$dirty 
+				}">
+				<label for="inputFirstName" class="col-md-4 control-label">First Name</label>
+				<div class="col-md-5">
+					<input type="text" class="form-control" id="inputFirstName" name="inputFirstName" 
+						placeholder="First Name" 
+						ng-model="register.firstname" required>
+					<span class="glyphicon glyphicon-ok form-control-feedback" 
+						ng-show="registerForm.inputFirstName.$valid && registerForm.inputFirstName.$dirty"></span>
+					<span class="glyphicon glyphicon-remove form-control-feedback" 
+						ng-show="registerForm.inputFirstName.$invalid && registerForm.inputFirstName.$dirty"></span>
 				</div>
+
+				<span class="validation-error-message">
+					<span ng-show="registerForm.inputFirstName.$error.required && registerForm.inputFirstName.$dirty">
+						Required!
+					</span>
+				</span>
 			</div>
 
 			<!-- Last Name -->
-			<div class="form-group">
-				<label for="inputLastName" class="col-sm-4 control-label">Last Name</label>
-				<div class="col-sm-5">
-					<input type="text" class="form-control" id="inputLastName" placeholder="Last Name">
+			<div class="form-group has-feedback" 
+				ng-class="{ 
+					'has-error' : registerForm.inputLastName.$invalid && registerForm.inputLastName.$dirty, 
+					'has-success':registerForm.inputLastName.$valid && registerForm.inputLastName.$dirty 
+				}">
+				<label for="inputLastName" class="col-md-4 control-label">Last Name</label>
+				<div class="col-md-5">
+					<input type="text" class="form-control" id="inputLastName" name="inputLastName" 
+						placeholder="Last Name" 
+						ng-model="register.lastname" required>
+					<span class="glyphicon glyphicon-ok form-control-feedback" 
+						ng-show="registerForm.inputLastName.$valid && registerForm.inputLastName.$dirty"></span>
+					<span class="glyphicon glyphicon-remove form-control-feedback" 
+						ng-show="registerForm.inputLastName.$invalid && registerForm.inputLastName.$dirty"></span>
 				</div>
+
+				<span class="validation-error-message">
+					<span ng-show="registerForm.inputLastName.$error.required && registerForm.inputLastName.$dirty">
+						Required!
+					</span>
+				</span>
 			</div>
 
 			<!-- Password -->
-			<div class="form-group">
-				<label for="inputPassword" class="col-sm-4 control-label">Password</label>
-				<div class="col-sm-5">
-					<input type="password" class="form-control" id="inputPassword" placeholder="Password">
+			<div class="form-group has-feedback" 
+				ng-class="{ 
+					'has-error' : registerForm.inputPassword.$invalid && registerForm.inputPassword.$dirty, 
+					'has-success':registerForm.inputPassword.$valid && registerForm.inputPassword.$dirty 
+				}">
+				<label for="inputPassword" class="col-md-4 control-label">Password</label>
+				<div class="col-md-5">
+					<input type="password" class="form-control" id="inputPassword" name="inputPassword" 
+						placeholder="Password" 
+						ng-model="register.password" 
+						ng-minlength=8 
+						ng-maxlength=16 
+						ng-pattern="/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)[^\s]{8,16}$/" 
+						required>
+					<span class="glyphicon glyphicon-ok form-control-feedback" 
+						ng-show="registerForm.inputPassword.$valid && registerForm.inputPassword.$dirty"></span>
+					<span class="glyphicon glyphicon-remove form-control-feedback" 
+						ng-show="registerForm.inputPassword.$invalid && registerForm.inputPassword.$dirty"></span>
+				</div>
+
+				<span class="validation-error-message">
+					<span ng-show="registerForm.inputPassword.$error.required && registerForm.inputPassword.$dirty">
+						Required!
+					</span>
+					<span ng-show="registerForm.inputPassword.$error.minlength && registerForm.inputPassword.$dirty">
+						Password too short!
+					</span>
+					<span ng-show="registerForm.inputPassword.$error.maxlength && registerForm.inputPassword.$dirty">
+						Password too long!
+					</span>
+					<span ng-show="registerForm.inputPassword.$error.pattern && registerForm.inputPassword.$dirty">
+						Invalid password!
+					</span>
+				</span>
+
+				<div class="col-md-offset-4">
+					<label class="label-password">
+						<ul>
+							<li>8-16 characters</li>
+							<li>At least 1 lowercase letter</li>
+							<li>At least 1 uppercase letter</li>
+							<li>At least 1 number</li>
+							<li>At least 1 special letter</li>
+							<li>No spaces</li>
+						</ul>
+					</label>
 				</div>
 			</div>
 
 			<!-- Confirm Password -->
-			<div class="form-group">
-				<label for="inputConfirmPassword" class="col-sm-4 control-label">Confirm Password</label>
-				<div class="col-sm-5">
-					<input type="password" class="form-control" id="inputConfirmPassword" placeholder="Confirm Password">
+			<div class="form-group has-feedback" 
+				ng-class="{ 
+					'has-error' : registerForm.inputConfirmPassword.$invalid && registerForm.inputConfirmPassword.$dirty, 'has-success':registerForm.inputConfirmPassword.$valid && registerForm.inputConfirmPassword.$dirty 
+				}">
+				<label for="inputConfirmPassword" class="col-md-4 control-label">Confirm Password</label>
+				<div class="col-md-5">
+					<input type="password" class="form-control" id="inputConfirmPassword" name="inputConfirmPassword" 
+						placeholder="Confirm Password" 
+						ng-model="register.confirm" 
+						pw-check="inputPassword" 
+						required>
+					<span class="glyphicon glyphicon-ok form-control-feedback" 
+						ng-show="registerForm.inputConfirmPassword.$valid && registerForm.inputConfirmPassword.$dirty"></span>
+					<span class="glyphicon glyphicon-remove form-control-feedback" 
+						ng-show="registerForm.inputConfirmPassword.$invalid && registerForm.inputConfirmPassword.$dirty"></span>
 				</div>
+
+				<span class="validation-error-message">
+					<span ng-show="registerForm.inputConfirmPassword.$error.required && registerForm.inputConfirmPassword.$dirty">Required!</span>
+					<span ng-show="registerForm.inputConfirmPassword.$error.pwmatch && registerForm.inputConfirmPassword.$dirty">Not match!</span>
+				</span>
 			</div>
 		</div>
 		<div class="modal-footer">
 			<div class="form-group">
-					<button class="btn btn-primary" ng-click="create()">Create</button>
-					<button class="btn btn-default" ng-click="cancelCreate()">Cancel</button>
+				<button class="btn btn-primary" type="submit" ng-disabled="registerForm.$invalid || registerForm.$pristine">Create</button>
+				<button class="btn btn-default" ng-click="cancelCreate()">Cancel</button>
 			</div>
 		</div>
 	</form>
@@ -82,23 +192,46 @@
 <!-- forgot password modal -->
 <script type="text/ng-template" id="forgotPassword.html">
 	<div class="modal-header">
+		<button type="button" class="close" aria-hidden="true" ng-click="cancelSend()">&times;</button>
 		<h3 class="modal-title">Find your password</h3>
 	</div>
 
-	<form class="form-horizontal" role="form" name="registerForm">
+	<form class="form-horizontal" role="form" name="forgotEmailForm" ng-submit="sendEmail()" novalidate>
 		<div class="modal-body">
 			<!-- Email -->
-			<div class="form-group">
-				<div class="col-sm-8">
-					<label for="forgotPasswordEmail" class="control-label">Your Email</label>
-					<input type="email" class="form-control" id="forgotPasswordEmail" placeholder="Please type your Email address...">
+			<div class="form-group form-group-forgot has-feedback" 
+				ng-class="{ 
+					'has-error':forgotEmailForm.forgotPasswordEmail.$invalid && forgotEmailForm.forgotPasswordEmail.$dirty,
+					'has-success':forgotEmailForm.forgotPasswordEmail.$valid && forgotEmailForm.forgotPasswordEmail.$dirty 
+				}">
+				<label for="forgotPasswordEmail" class="control-label label-forgot-email">Your Email</label><br/>
+				
+				<div class="col-md-7">
+					<input type="email" class="form-control" id="forgotPasswordEmail" 
+						name="forgotPasswordEmail" placeholder="please type your email here..." 
+						ng-model="register.forgot" 
+						required>
+					<span class="glyphicon glyphicon-ok form-control-feedback" 
+						ng-show="forgotEmailForm.forgotPasswordEmail.$valid && forgotEmailForm.forgotPasswordEmail.$dirty"></span>
+					<span class="glyphicon glyphicon-remove form-control-feedback" 
+						ng-show="forgotEmailForm.forgotPasswordEmail.$invalid && forgotEmailForm.forgotPasswordEmail.$dirty"></span>
 				</div>
+
+				<span class="validation-error-message">
+					<span ng-show="forgotEmailForm.forgotPasswordEmail.$error.required && forgotEmailForm.forgotPasswordEmail.$dirty">
+						Required!
+					</span>
+					<span ng-show="forgotEmailForm.forgotPasswordEmail.$error.email">
+						Not valid email!
+					</span>
+				</span>
 			</div>
 		</div>
 		<div class="modal-footer">
 			<div class="form-group">
-					<button class="btn btn-primary" ng-click="sendEmail()">Send</button>
-					<button class="btn btn-default" ng-click="cancelSend()">Cancel</button>
+				<button type="submit" class="btn btn-primary" type="submit" 
+					ng-disabled="forgotEmailForm.$invalid || forgotEmailForm.$pristine">Send</button>
+				<button class="btn btn-default" ng-click="cancelSend()">Cancel</button>
 			</div>
 		</div>
 	</form>

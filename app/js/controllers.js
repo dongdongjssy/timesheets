@@ -27,6 +27,8 @@ var LoginController = function($scope, $modal) {
 
 /* Create Account Modal Controller */
 var CreateAccountModalController = function ($scope, $modalInstance) {
+	$scope.errors = null;
+	
 	$scope.create = function () {
 		var newPerson = {
 			Email: $('#inputEmail').val(),

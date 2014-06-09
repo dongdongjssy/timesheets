@@ -1,7 +1,46 @@
-.gridStyle {
-  border: 1px solid rgb(212,212,212);
-  width: 400px; 
-  height: 300px;
+/* MESSAGES AND ERRORS */
+.alert {
+  padding: 8px;
+}
+
+.error,.message {
+  font-size: 1.0em;
+  font-weight: bolder;
+  line-height: 1.5;
+  margin: 1em 2em;
+  padding: 0.25em;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+}
+
+.message {
+  background: #d9edf7;
+  border-color: #bce8f1;
+  color: #3a87ad;
+  -moz-box-shadow: 0 0 0.25em #b2d1ff;
+  -webkit-box-shadow: 0 0 0.25em #b2d1ff;
+  box-shadow: 0 0 0.25em #b2d1ff;
+  padding: 0;
+  -webkit-box-shadow: 0 0 0.25em #b2d1ff;
+  box-shadow: 0 0 0.25em #b2d1ff;
+}
+
+.error {
+  color: #b94a48;
+  background-color: #f2dede;
+  border-color: #eed3d7;
+  -moz-box-shadow: 0 0 0.25em #ff8888;
+  -webkit-box-shadow: 0 0 0.25em #ff8888;
+  box-shadow: 0 0 0.25em #ff8888;
+  -webkit-box-shadow: 0 0 0.25em #ff8888;
+  box-shadow: 0 0 0.25em #ff8888;
+  margin-bottom: 15px;
+}
+
+.error ul {
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
 
 /* 
@@ -55,6 +94,30 @@
   background-color: #dddddd;
   background-image: linear-gradient(#eee, #ddd);
   border-color: #ccc;
+}
+
+.validation-error-message {
+  color: #a94442;
+  margin-top: 10px;
+  width: 150px;
+  line-height: 2.5;
+}
+
+.form-group-forgot {
+  margin-bottom: 0px;
+}
+
+.label-forgot-email {
+  margin: 10px 15px;
+  padding-bottom: 10px;
+}
+
+.label-password{
+  width: 215px;
+  font-size: 11px;
+  margin: 5px 0px 0px 15px;
+  border-radius: 4px;
+  background-color: #f5f5f5;
 }
 
 /*
