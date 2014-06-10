@@ -4,7 +4,7 @@
 // Declare app level module which depends on filters, and services
 var timesheetsApp = angular.module('timesheetsApp', [
 	'ngRoute',
-	'ngGrid',
+	'xeditable',
 	'ui.bootstrap',
 	'timesheetsApp.filters',
 	'timesheetsApp.services',
@@ -71,3 +71,7 @@ timesheetsApp.config(['$routeProvider',
 		.otherwise({redirectTo: '/login'});
 	}
 ]);
+
+timesheetsApp.run(function(editableOptions){
+  editableOptions.theme = 'bs3';
+});
