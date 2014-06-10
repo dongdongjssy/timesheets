@@ -116,10 +116,8 @@
 				<div class="col-md-5">
 					<input type="password" class="form-control" id="inputPassword" name="inputPassword" 
 						placeholder="Password" 
-						ng-model="register.password" 
-						ng-minlength=8 
-						ng-maxlength=16 
-						ng-pattern="/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)[^\s]{8,16}$/" 
+						ng-model="register.password"
+						ng-pattern="/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)[^\s]{6,16}$/" 
 						required>
 					<span class="glyphicon glyphicon-ok form-control-feedback" 
 						ng-show="registerForm.inputPassword.$valid && registerForm.inputPassword.$dirty"></span>
@@ -145,7 +143,7 @@
 				<div class="col-md-offset-4">
 					<label class="label-password">
 						<ul>
-							<li>8-16 characters</li>
+							<li>6-16 characters</li>
 							<li>At least 1 lowercase letter</li>
 							<li>At least 1 uppercase letter</li>
 							<li>At least 1 number</li>
