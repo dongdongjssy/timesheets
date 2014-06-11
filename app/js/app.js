@@ -9,9 +9,8 @@ var timesheetsApp = angular.module('timesheetsApp', [
 	'timesheetsApp.filters',
 	'timesheetsApp.services',
 	'timesheetsApp.directives',
-	'timesheetsApp.controllers',
-  'timesheetsApp.config'
-	], function($httpProvider){
+	'timesheetsApp.controllers'
+  ], function($httpProvider){
 	// Use x-www-form-urlencoded Content-Type
 	$httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
 
