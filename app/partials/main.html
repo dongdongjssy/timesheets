@@ -10,13 +10,13 @@
         </li>
         <li class="dropdown">
           <a id="userInfo" role="button" data-toggle="dropdown" href="">
-            Administrator&nbsp;<b class="caret"></b>
+            {{user.username}}&nbsp;<b class="caret"></b>
           </a>
           <ul id="userInfoMenu" class="dropdown-menu" role="menu" aria-labelledby="userInfoMenu">
             <li role="presentation"><a role="menuitem" tabindex="-1" href="">Profile</a></li>
             <li role="presentation"><a role="menuitem" tabindex="-1" href="">Setting</a></li>
             <li role="presentation" class="divider"></li>
-            <li role="presentation"><a role="menuitem" tabindex="-1" href="">Sign out</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="" ng-click="logout()">Sign out</a></li>
           </ul>
         </li>
       </ul>

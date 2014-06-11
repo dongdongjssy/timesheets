@@ -1,16 +1,30 @@
 <div class="login-body">
-	<form class="form-login" role="form">
+	<form class="form-login" role="form" name="loginForm">
 		<div class="form-login-header">
 			<h1>Sign in</h1>
 		</div> 
 
 		<div class="form-login-body">
-			<label>Email</label>
-			<input type="email" class="form-control" placeholder="Email address" required autofocus>
-			<label>Password</label><a ng-click="openForgotPasswordModal()" href=""> (forgot password?)</a>
-			<input type="password" class="form-control" placeholder="Password" required>
+			<div class="form-group" id="loginEmailGroup">
+				<label for="loginEmail">Email</label>
+				<div class="login-error">
+					<span id="loginEmailError">{{loginEmailError}}</span>
+				</div>
+				<input type="email" class="form-control" id="loginEmail" name="loginEmail" 
+					placeholder="Email address" ng-model="loginEmail" required>
+			</div>
+
+			<label for="loginPassword">Password</label>
+			<a ng-click="openForgotPasswordModal()" href=""> (forgot password?)</a>
+			<div class="form-group" id="loginPasswordGroup">
+				<div class="login-error">
+					<span id="loginPasswordError">{{loginPasswordError}}</span>
+				</div>
+				<input type="password" class="form-control" id="loginPassword" name="loginPassword" 
+					placeholder="Password" ng-model="loginPassword" required>
+			</div>
 			
-			<a class="btn btn-default login-btn" href="#/main">Sign in</a>&nbsp;Or&nbsp;
+			<a class="btn btn-default login-btn" href="" ng-click="login()">Sign in</a>&nbsp;Or&nbsp;
 			<a ng-click="openCreateAccountModal()" href="">Create an account</a>
 		</div>
 	</form>
@@ -181,7 +195,7 @@
 		<div class="modal-footer">
 			<div class="form-group">
 				<button class="btn btn-primary" type="submit" ng-disabled="registerForm.$invalid || registerForm.$pristine">Create</button>
-				<button class="btn btn-default" ng-click="cancelCreate()">Cancel</button>
+				<button type="button" class="btn btn-default" ng-click="cancelCreate()">Cancel</button>
 			</div>
 		</div>
 	</form>
@@ -229,7 +243,7 @@
 			<div class="form-group">
 				<button type="submit" class="btn btn-primary" type="submit" 
 					ng-disabled="forgotEmailForm.$invalid || forgotEmailForm.$pristine">Send</button>
-				<button class="btn btn-default" ng-click="cancelSend()">Cancel</button>
+				<button type="button" class="btn btn-default" ng-click="cancelSend()">Cancel</button>
 			</div>
 		</div>
 	</form>

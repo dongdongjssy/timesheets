@@ -96,8 +96,15 @@
   border-color: #ccc;
 }
 
-.validation-error-message {
+.login-error, .validation-error-message {
   color: #a94442;
+}
+
+.login-error {
+  font-size: 12px;
+}
+
+.validation-error-message {
   margin-top: 10px;
   width: 150px;
   line-height: 2.5;

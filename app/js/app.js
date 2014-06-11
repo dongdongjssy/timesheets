@@ -1,11 +1,18 @@
 'use strict';
 
+$(function () {
+  // Disable caching for all AJAX requests (this is necessary to prevent IE from caching AJAX requests).
+  $.ajaxSetup({
+      cache:false
+  });
+});
 
 // Declare app level module which depends on filters, and services
 var timesheetsApp = angular.module('timesheetsApp', [
 	'ngRoute',
 	'xeditable',
 	'ui.bootstrap',
+  'ui.router',
 	'timesheetsApp.filters',
 	'timesheetsApp.services',
 	'timesheetsApp.directives',
@@ -56,20 +63,38 @@ var timesheetsApp = angular.module('timesheetsApp', [
   }];
 });
 
-timesheetsApp.config(['$routeProvider', 
-	function($routeProvider) {
-		$routeProvider.
-		when('/login', {
-			templateUrl: 'partials/login.html', 
-			controller: 'LoginController'
-		}).
-		when('/main', {
-			templateUrl: 'partials/main.html', 
-			controller: 'MainController'
-		})
-		.otherwise({redirectTo: '/login'});
-	}
-]);
+// timesheetsApp.config(['$routeProvider', 
+// 	function($routeProvider) {
+// 		$routeProvider.
+// 		when('/login', {
+// 			templateUrl: 'partials/login.html', 
+// 			controller: 'LoginController'
+// 		}).
+// 		when('/main', {
+// 			templateUrl: 'partials/main.html', 
+// 			controller: 'MainController'
+// 		})
+// 		.otherwise({redirectTo: '/login'});
+// 	}
+// ]);
+
+timesheetsApp.config(function($stateProvider, $locationProvider,$urlRouterProvider) {
+  $locationProvider.html5Mode(true);
+
+  $urlRouterProvider.otherwise("/login");
+
+  $stateProvider
+    .state('login',{
+      url: '/login',
+      templateUrl: 'partials/login.html',
+      controller: 'LoginController'
+    })
+    .state('main',{
+      url: '/main',
+      templateUrl: 'partials/main.html',
+      controller: 'MainController'
+    });
+});
 
 timesheetsApp.run(function(editableOptions){
   editableOptions.theme = 'bs3';

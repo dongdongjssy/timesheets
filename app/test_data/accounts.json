@@ -3,30 +3,30 @@
 		"Email": "user1@timesheets.com",
 		"FirstName": "User1",
 		"LastName": "Test",
-		"Password": "pwd123PWD!",
+		"Password": "pwd123PWD!"
 	},
 	{
 		"Email": "user2@timesheets.com",
 		"FirstName": "User2",
 		"LastName": "Test",
-		"Password": "pwd123PWD!",
+		"Password": "pwd123PWD!"
 	},
 	{
 		"Email": "user3@timesheets.com",
 		"FirstName": "User3",
 		"LastName": "Test",
-		"Password": "pwd123PWD!",
+		"Password": "pwd123PWD!"
 	},
 	{
 		"Email": "user4@timesheets.com",
 		"FirstName": "User4",
 		"LastName": "Test",
-		"Password": "pwd123PWD!",
+		"Password": "pwd123PWD!"
 	},
 	{
 		"Email": "user5@timesheets.com",
 		"FirstName": "User5",
 		"LastName": "Test",
-		"Password": "pwd123PWD!",
+		"Password": "pwd123PWD!"
 	}
 ]
