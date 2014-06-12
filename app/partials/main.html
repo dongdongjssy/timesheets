@@ -5,18 +5,27 @@
     </div>
     <div class="navbar-collapse collapse">
       <ul class="nav navbar-nav navbar-right">
-        <li class="profile-img">
-          <i class="fa fa-user fa-2x fa-inverse"></i>
-        </li>
         <li class="dropdown">
           <a id="userInfo" role="button" data-toggle="dropdown" href="">
             {{user.username}}&nbsp;<b class="caret"></b>
           </a>
           <ul id="userInfoMenu" class="dropdown-menu" role="menu" aria-labelledby="userInfoMenu">
-            <li role="presentation"><a role="menuitem" tabindex="-1" href="">Profile</a></li>
-            <li role="presentation"><a role="menuitem" tabindex="-1" href="">Setting</a></li>
+            <li role="presentation">
+              <a role="menuitem" tabindex="-1" href="">
+                <span class="glyphicon glyphicon-user"></span>&nbsp;Profile
+              </a>
+            </li>
+            <li role="presentation">
+              <a role="menuitem" tabindex="-1" href="">
+                <span class="glyphicon glyphicon-cog"></span>&nbsp;Setting
+              </a>
+            </li>
             <li role="presentation" class="divider"></li>
-            <li role="presentation"><a role="menuitem" tabindex="-1" href="" ng-click="logout()">Sign out</a></li>
+            <li role="presentation">
+              <a role="menuitem" tabindex="-1" href="" ng-click="logout()">
+                <span class="glyphicon glyphicon-log-out"></span>&nbsp;Sign out
+              </a>
+            </li>
           </ul>
         </li>
       </ul>
@@ -31,59 +40,34 @@
   <div class="row">
     <div class="col-sm-3 col-md-2 sidebar">
       <ul class="nav nav-sidebar">
-        <li class="active"><a href="#/main">Overview</a></li>
-        <li><a href="#/reports">Reports</a></li>
-        <li><a href="#/analytics">Analytics</a></li>
-        <li><a href="#/export">Export</a></li>
+        <li ng-class="navClass('overview')">
+          <a href="#/overview">
+            <span class="glyphicon glyphicon-home"></span>
+            <span class="title-side-nav">Overview</span>
+          </a>
+        </li>
+        <li ng-class="navClass('reports')">
+          <a href="#/reports">
+            <i class="glyphicon glyphicon-list-alt"></i>
+            <span class="title-side-nav">Reports</span>
+          </a>
+        </li>
+        <li ng-class="navClass('analytics')">
+          <a href="#/analytics">
+            <i class="glyphicon glyphicon-stats"></i>
+            <span class="title-side-nav">Analytics</span>
+          </a>
+        </li>
+        <li ng-class="navClass('export')">
+          <a href="#/export">
+            <i class="glyphicon glyphicon-export"></i>
+            <span class="title-side-nav">Export</span>
+          </a>
+        </li>
       </ul>
     </div>
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-      <h2 class="sub-header">Time Sheets</h2>
-
-      <div class="table-responsive">
-        <table class="table table-striped">
-          <thead>
-            <tr>
-              <th></th>
-              <th>Customer</th>
-              <th>Project</th>
-              <th>Hour</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th>Monday</th>
-              <td contentEditable="true">Lorem</td>
-              <td contentEditable="true">ipsum</td>
-              <td contentEditable="true">dolor</td>
-            </tr>
-            <tr>
-              <th>Tuesday</th>
-              <td>amet</td>
-              <td>consectetur</td>
-              <td>adipiscing</td>
-            </tr>
-            <tr>
-              <th>Wensday</th>
-              <td>Integer</td>
-              <td>nec</td>
-              <td>odio</td>
-            </tr>
-            <tr>
-              <th>Thursday</th>
-              <td>libero</td>
-              <td>Sed</td>
-              <td>cursus</td>
-            </tr>
-            <tr>
-              <th>Friday</th>
-              <td>dapibus</td>
-              <td>diam</td>
-              <td>Sed</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+      <div ng-include="template.url"></idv>
     </div>
   </div>
 </div>

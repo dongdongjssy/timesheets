@@ -73,6 +73,22 @@ timesheetsApp.config(['$routeProvider',
 			templateUrl: 'partials/main.html', 
 			controller: 'MainController'
 		})
+    .when('/overview', {
+      templateUrl: 'partials/main.html', 
+      controller: 'MainController'
+    })
+    .when('/reports', {
+      templateUrl: 'partials/main.html', 
+      controller: 'MainController'
+    })
+    .when('/analytics', {
+      templateUrl: 'partials/main.html', 
+      controller: 'MainController'
+    })
+    .when('/export', {
+      templateUrl: 'partials/main.html', 
+      controller: 'MainController'
+    })
 		.otherwise({redirectTo: '/login'});
 	}
 ]);
