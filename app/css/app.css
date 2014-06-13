@@ -176,6 +176,10 @@ body {
   background-color: #428bca;
 }
 
+.nav-sidebar > .active > a:hover {
+  background-color: #428bef;
+}
+
 .title-side-nav {
   padding-left: 5px;
   font-weight: bold;
