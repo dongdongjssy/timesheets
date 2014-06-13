@@ -69,10 +69,6 @@ timesheetsApp.config(['$routeProvider',
 			templateUrl: 'partials/login.html', 
 			controller: 'LoginController'
 		})
-		.when('/main', {
-			templateUrl: 'partials/main.html', 
-			controller: 'MainController'
-		})
     .when('/overview', {
       templateUrl: 'partials/main.html', 
       controller: 'MainController'

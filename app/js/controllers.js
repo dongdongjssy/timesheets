@@ -37,7 +37,7 @@ var LoginController = function($scope, $location, $modal, User) {
 			return;
 		}
 
-		window.location = '#/main';
+		window.location = '#/overview';
 	}
 
 	$scope.openCreateAccountModal = function() {
