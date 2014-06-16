@@ -3,7 +3,7 @@
 <div class="table-responsive">
   <button class="btn btn-default pull-right" ng-click="addUser()">Add project</button><br/>
 
-  <table class="table table-bordered table-hover table-condensed table-striped">
+  <table class="table table-bordered table-hover table-condensed table-timesheets">
     <tr>
       <th></th>
       <th>Customer</th>
@@ -11,24 +11,205 @@
       <th>Hour</th>
       <th>Edit</th>
     </tr>
-    <tr ng-repeat="day in days">
-      <th width="20%">
-        {{ day || 'empty' }}
-      </th>
 
+    <!-- Monday task list -->
+    <tr>
+      <th rowspan='{{mondays.length + 1}}'>{{ days[0] }}</th>
+    </tr>
+
+    <tr ng-repeat = "sheet in mondays">
       <td>
-        <span editable-select="records.customer" e-ng-options="s.id as s.name for s in customers" e-form="rowform">
-          {{ showCustomers() }}
+        <span editable-select="sheet.customerId" e-ng-options="s.id as s.name for s in customers" e-form="rowform">
+          {{ showCustomers(sheet) }}
         </span>
       </td>
 
       <td>
-        <span editable-select="records.project" e-ng-options="s.id as s.name for s in projects" e-form="rowform">
-          {{ showProjects() }}
+        <span editable-select="sheet.projectId" e-ng-options="s.id as s.name for s in projects" e-form="rowform">
+          {{ showProjects(sheet) }}
         </span>
       </td>
 
-      <td></td>
+      <td>
+        <span editable-text="sheet.hour" e-form="rowform" e-required>
+          {{ sheet.hour || 'empty'}}
+      </td>
+
+      <td style="white-space: nowrap">
+        <!-- form -->
+        <form editable-form name="rowform" ng-show="rowform.$visible">
+          <button type="submit" ng-disabled="rowform.$waiting">
+            <i class="glyphicon glyphicon-ok"></i>
+          </button>
+          <button type="button" ng-disabled="rowform.$waiting" ng-click="rowform.$cancel()">
+            <i class="glyphicon glyphicon-remove"></i>
+          </button>
+        </form>
+        <div class="buttons" ng-show="!rowform.$visible">
+          <a ng-click="rowform.$show()">
+            <i class="glyphicon glyphicon-pencil"></i>
+          </a>
+          <a ng-click="removeUser($index)">
+            <i class="glyphicon glyphicon-trash"></i>
+          </a>
+        </div>  
+      </td>
+    </tr>
+
+        <!-- Tuesday task list -->
+    <tr>
+      <th rowspan='{{tuesdays.length + 1}}'>{{ days[1] }}</th>
+    </tr>
+
+    <tr ng-repeat = "sheet in tuesdays">
+      <td>
+        <span editable-select="sheet.customerId" e-ng-options="s.id as s.name for s in customers" e-form="rowform">
+          {{ showCustomers(sheet) }}
+        </span>
+      </td>
+
+      <td>
+        <span editable-select="sheet.projectId" e-ng-options="s.id as s.name for s in projects" e-form="rowform">
+          {{ showProjects(sheet) }}
+        </span>
+      </td>
+
+      <td>
+        <span editable-text="sheet.hour" e-form="rowform" e-required>
+          {{ sheet.hour || 'empty'}}
+      </td>
+
+      <td style="white-space: nowrap">
+        <!-- form -->
+        <form editable-form name="rowform" ng-show="rowform.$visible">
+          <button type="submit" ng-disabled="rowform.$waiting">
+            <i class="glyphicon glyphicon-ok"></i>
+          </button>
+          <button type="button" ng-disabled="rowform.$waiting" ng-click="rowform.$cancel()">
+            <i class="glyphicon glyphicon-remove"></i>
+          </button>
+        </form>
+        <div class="buttons" ng-show="!rowform.$visible">
+          <a ng-click="rowform.$show()">
+            <i class="glyphicon glyphicon-pencil"></i>
+          </a>
+          <a ng-click="removeUser($index)">
+            <i class="glyphicon glyphicon-trash"></i>
+          </a>
+        </div>  
+      </td>
+    </tr>
+
+        <!-- Wednesday task list -->
+    <tr>
+      <th rowspan='{{wednesdays.length + 1}}'>{{ days[2] }}</th>
+    </tr>
+
+    <tr ng-repeat = "sheet in wednesdays">
+      <td>
+        <span editable-select="sheet.customerId" e-ng-options="s.id as s.name for s in customers" e-form="rowform">
+          {{ showCustomers(sheet) }}
+        </span>
+      </td>
+
+      <td>
+        <span editable-select="sheet.projectId" e-ng-options="s.id as s.name for s in projects" e-form="rowform">
+          {{ showProjects(sheet) }}
+        </span>
+      </td>
+
+      <td>
+        <span editable-text="sheet.hour" e-form="rowform" e-required>
+          {{ sheet.hour || 'empty'}}
+      </td>
+
+      <td style="white-space: nowrap">
+        <!-- form -->
+        <form editable-form name="rowform" ng-show="rowform.$visible">
+          <button type="submit" ng-disabled="rowform.$waiting">
+            <i class="glyphicon glyphicon-ok"></i>
+          </button>
+          <button type="button" ng-disabled="rowform.$waiting" ng-click="rowform.$cancel()">
+            <i class="glyphicon glyphicon-remove"></i>
+          </button>
+        </form>
+        <div class="buttons" ng-show="!rowform.$visible">
+          <a ng-click="rowform.$show()">
+            <i class="glyphicon glyphicon-pencil"></i>
+          </a>
+          <a ng-click="removeUser($index)">
+            <i class="glyphicon glyphicon-trash"></i>
+          </a>
+        </div>  
+      </td>
+    </tr>
+
+        <!-- Thursday task list -->
+    <tr>
+      <th rowspan='{{thursdays.length + 1}}'>{{ days[3] }}</th>
+    </tr>
+
+    <tr ng-repeat = "sheet in thursdays">
+      <td>
+        <span editable-select="sheet.customerId" e-ng-options="s.id as s.name for s in customers" e-form="rowform">
+          {{ showCustomers(sheet) }}
+        </span>
+      </td>
+
+      <td>
+        <span editable-select="sheet.projectId" e-ng-options="s.id as s.name for s in projects" e-form="rowform">
+          {{ showProjects(sheet) }}
+        </span>
+      </td>
+
+      <td>
+        <span editable-text="sheet.hour" e-form="rowform" e-required>
+          {{ sheet.hour || 'empty'}}
+      </td>
+
+      <td style="white-space: nowrap">
+        <!-- form -->
+        <form editable-form name="rowform" ng-show="rowform.$visible">
+          <button type="submit" ng-disabled="rowform.$waiting">
+            <i class="glyphicon glyphicon-ok"></i>
+          </button>
+          <button type="button" ng-disabled="rowform.$waiting" ng-click="rowform.$cancel()">
+            <i class="glyphicon glyphicon-remove"></i>
+          </button>
+        </form>
+        <div class="buttons" ng-show="!rowform.$visible">
+          <a ng-click="rowform.$show()">
+            <i class="glyphicon glyphicon-pencil"></i>
+          </a>
+          <a ng-click="removeUser($index)">
+            <i class="glyphicon glyphicon-trash"></i>
+          </a>
+        </div>  
+      </td>
+    </tr>
+
+        <!-- Friday task list -->
+    <tr>
+      <th rowspan='{{fridays.length + 1}}'>{{ days[4] }}</th>
+    </tr>
+
+    <tr ng-repeat = "sheet in fridays">
+      <td>
+        <span editable-select="sheet.customerId" e-ng-options="s.id as s.name for s in customers" e-form="rowform">
+          {{ showCustomers(sheet) }}
+        </span>
+      </td>
+
+      <td>
+        <span editable-select="sheet.projectId" e-ng-options="s.id as s.name for s in projects" e-form="rowform">
+          {{ showProjects(sheet) }}
+        </span>
+      </td>
+
+      <td>
+        <span editable-text="sheet.hour" e-form="rowform" e-required>
+          {{ sheet.hour || 'empty'}}
+      </td>
 
       <td style="white-space: nowrap">
         <!-- form -->

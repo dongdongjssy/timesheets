@@ -127,19 +127,20 @@ var MainController = function ($scope, $filter, $http, $location, UserService, D
 	$scope.projects = DataService.getProjects();
   $scope.customers = DataService.getCustomers();
 
-  $scope.records = {
-  	customer: 2,
-  	project: 3
+  $scope.mondays = DataService.getTimesheets($scope.days[0]);
+  $scope.tuesdays = DataService.getTimesheets($scope.days[1]);
+  $scope.wednesdays = DataService.getTimesheets($scope.days[2]);
+  $scope.thursdays = DataService.getTimesheets($scope.days[3]);
+  $scope.fridays = DataService.getTimesheets($scope.days[4]);
+
+  $scope.showCustomers = function(sheet) {
+    var selected = $filter('filter')($scope.customers, {id: sheet.customerId});
+    return (sheet.customer && selected.length) ? selected[0].name : 'Not set';
   };
 
-  $scope.showCustomers = function() {
-    var selected = $filter('filter')($scope.customers, {id: $scope.records.customer});
-    return ($scope.records.customer && selected.length) ? selected[0].name : 'Not set';
-  };
-
-  $scope.showProjects = function() {
-  	var selected = $filter('filter')($scope.projects, {id: $scope.records.project});
-  	return ($scope.records.project && selected.length) ? selected[0].name : 'Not set';
+  $scope.showProjects = function(sheet) {
+  	var selected = $filter('filter')($scope.projects, {id: sheet.projectId});
+  	return (sheet.project && selected.length) ? selected[0].name : 'Not set';
   };
 };
 

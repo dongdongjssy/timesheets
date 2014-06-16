@@ -197,3 +197,8 @@ body {
 .main .page-header {
   margin-top: 0;
 }
+
+.table-timesheets tr th {
+  background-color: #f5f5f5;
+  vertical-align: middle !important;
+}

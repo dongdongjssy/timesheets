@@ -9,6 +9,8 @@
         "Id": 1,
         "TimesheetId": 1,
         "ProjectName": "Project1",
+        "ProjectId": 1,
+        "CustomerId": 1,
         "CustomerName": "Customer1",
         "Hours": 4
       },
@@ -16,6 +18,8 @@
         "Id": 2,
         "TimesheetId": 1,
         "ProjectName": "Project2",
+        "ProjectId": 2,
+        "CustomerId": 1,
         "CustomerName": "Customer1",
         "Hours": 2
       },
@@ -23,6 +27,8 @@
         "Id": 3,
         "TimesheetId": 1,
         "ProjectName": "Project3",
+        "ProjectId": 3,
+        "CustomerId": 2,
         "CustomerName": "Customer2",
         "Hours": 2
       }
@@ -38,6 +44,8 @@
         "Id": 4,
         "TimesheetId": 2,
         "ProjectName": "Project2",
+        "ProjectId": 2,
+        "CustomerId": 2,
         "CustomerName": "Customer2",
         "Hours": 8
       }
@@ -47,12 +55,14 @@
     "Id": 3,
     "ApplicationUserId": 1,
     "ApplicationUserName": "User1",
-    "Date": "Wensday",
+    "Date": "Wednesday",
     "Entries": [
       {
         "Id": 5,
         "TimesheetId": 3,
         "ProjectName": "Project1",
+        "ProjectId": 1,
+        "CustomerId": 1,
         "CustomerName": "Customer1",
         "Hours": 4
       },
@@ -60,6 +70,8 @@
         "Id": 6,
         "TimesheetId": 3,
         "ProjectName": "Project3",
+        "ProjectId": 3,
+        "CustomerId": 2,
         "CustomerName": "Customer2",
         "Hours": 4
       }
@@ -75,6 +87,8 @@
         "Id": 7,
         "TimesheetId": 4,
         "ProjectName": "Project2",
+        "ProjectId": 2,
+        "CustomerId": 1,
         "CustomerName": "Customer1",
         "Hours": 8
       }
@@ -90,6 +104,8 @@
         "Id": 8,
         "TimesheetId": 5,
         "ProjectName": "Project1",
+        "ProjectId": 1,
+        "CustomerId": 1,
         "CustomerName": "Customer1",
         "Hours": 4
       },
@@ -97,73 +113,9 @@
         "Id": 9,
         "TimesheetId": 5,
         "ProjectName": "Project3",
+        "ProjectId": 3,
+        "CustomerId": 2,
         "CustomerName": "Customer2",
-        "Hours": 4
-      }
-    ]
-  },
-  {
-    "Id": 6,
-    "ApplicationUserId": 2,
-    "ApplicationUserName": "User2",
-    "Date": "Monday",
-    "Entries": [
-      {
-        "Id": 10,
-        "TimesheetId": 6,
-        "ProjectName": "Project4",
-        "CustomerName": "Customer3",
-        "Hours": 4
-      },
-      {
-        "Id": 11,
-        "TimesheetId": 6,
-        "ProjectName": "Project5",
-        "CustomerName": "Customer3",
-        "Hours": 2
-      },
-      {
-        "Id": 12,
-        "TimesheetId": 6,
-        "ProjectName": "Project6",
-        "CustomerName": "Customer2",
-        "Hours": 2
-      }
-    ]
-  },
-  {
-    "Id": 7,
-    "ApplicationUserId": 2,
-    "ApplicationUserName": "User2",
-    "Date": "Tuesday",
-    "Entries": [
-      {
-        "Id": 13,
-        "TimesheetId": 7,
-        "ProjectName": "Project4",
-        "CustomerName": "Customer3",
-        "Hours": 8
-      }
-    ]
-  },
-  {
-    "Id": 8,
-    "ApplicationUserId": 2,
-    "ApplicationUserName": "User2",
-    "Date": "Wensday",
-    "Entries": [
-      {
-        "Id": 14,
-        "TimesheetId": 8,
-        "ProjectName": "Project6",
-        "CustomerName": "Customer2",
-        "Hours": 4
-      },
-      {
-        "Id": 15,
-        "TimesheetId": 8,
-        "ProjectName": "Project5",
-        "CustomerName": "Customer3",
         "Hours": 4
       }
     ]

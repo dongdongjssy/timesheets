@@ -9,7 +9,7 @@ var timesheetsServices = angular.module('timesheetsApp.services', []);
 timesheetsServices.service('DataService', ['$http', function($http){
 
 	this.getDays = function() {
-		var days = ['Monday','Tuesday','Wensday','Thursday','Friday']; 
+		var days = ['Monday','Tuesday','Wednesday','Thursday','Friday']; 
 		return days;
 	};
 
@@ -50,13 +50,27 @@ timesheetsServices.service('DataService', ['$http', function($http){
 		return projects; 
 	};
 
-	this.getTimesheets = function() {
+	this.getTimesheets = function(day) {
 		var timesheets = [];
 
 		$http({method: 'GET', url: 'data/timesheets.json'})
 		.success(function(data){
-			$.each(data, function(index, obj) {
-				
+			$.each(data, function(i, timesheet) {
+				if(timesheet.Date === day){
+					$.each(timesheet.Entries, function(j, entry) {
+						timesheets.push({
+							timesheetId: timesheet.Id, 
+							user: timesheet.ApplicationUserName, 
+							day: timesheet.Date,
+							id: entry.Id,
+							customer: entry.CustomerName,
+							customerId: entry.CustomerId,
+							project: entry.ProjectName,
+							projectId: entry.ProjectId,
+							hour: entry.Hours
+						});
+					});
+				}
 			});
 		});
 
