@@ -7,56 +7,14 @@
 var timesheetsServices = angular.module('timesheetsApp.services', []);
 
 timesheetsServices.service('DataService', ['$http', function($http){
-
-	this.getDays = function() {
-		var days = ['Monday','Tuesday','Wednesday','Thursday','Friday']; 
-		return days;
-	};
-
-	this.getTemplates = function() { 
-		var templates = [ 
-			{ name: 'overview', url: 'partials/overview.html'},
-			{ name: 'reports', url: 'partials/reports.html'},
-			{ name: 'analytics', url: 'partials/analytics.html'},
-			{ name: 'export', url: 'partials/export.html'} 
-		];
-
-		return templates; 
-	};
-
-	this.getCustomers = function() {
-		var customers = [];
-
-		$http({method: 'GET', url: 'data/customers.json'})
-		.success(function(data) {
-			$.each(data, function(index, obj) {
-				customers.push({id: obj.Id, name: obj.Name});
-			});
-		});
-
-		return customers; 
-	};
-
-	this.getProjects = function() { 
-		var projects = []; 
-
-		$http({method: 'GET', url: 'data/projects.json'})
-		.success(function(data) {
-			$.each(data, function(index, obj) {
-				projects.push({id: obj.Id, name: obj.Name});
-			});
-		});
-
-		return projects; 
-	};
-
-	this.getTimesheets = function(day) {
-		var timesheets = [];
+	var getTimesheets = function(index, scope) {
 
 		$http({method: 'GET', url: 'data/timesheets.json'})
 		.success(function(data){
+			var timesheets = [];
+
 			$.each(data, function(i, timesheet) {
-				if(timesheet.Date === day){
+				if(timesheet.Date === scope.days[index]){
 					$.each(timesheet.Entries, function(j, entry) {
 						timesheets.push({
 							timesheetId: timesheet.Id, 
@@ -72,10 +30,63 @@ timesheetsServices.service('DataService', ['$http', function($http){
 					});
 				}
 			});
+
+			switch(index) {
+				case 0:
+					scope.mondays = timesheets;
+					break;
+				case 1:
+					scope.tuesdays = timesheets;
+					break;
+				case 2:
+					scope.wednesdays = timesheets;
+					break;
+				case 3:
+					scope.thursdays = timesheets;
+					break;
+				case 4:
+					scope.fridays = timesheets;
+					break;
+				default:
+					break;
+			}
+
 		});
 
-		return timesheets;
-	} 
+	};
+
+	this.populateData = function(scope) {
+		// set days
+		scope.days = ['Monday','Tuesday','Wednesday','Thursday','Friday']; 
+
+		// set templates
+		scope.templates = [ 
+			{ name: 'overview', url: 'partials/overview.html'},
+			{ name: 'reports', url: 'partials/reports.html'},
+			{ name: 'analytics', url: 'partials/analytics.html'},
+			{ name: 'export', url: 'partials/export.html'} 
+		];
+
+		scope.template = scope.templates[0];
+
+		// set customers
+		$http({method: 'GET', url: 'data/customers.json'})
+		.success(function(data) {
+			var customers = [];
+
+			$.each(data, function(index, obj) {
+				customers.push({ id: obj.Id, name: obj.Name, projects: obj.Projects });
+			});
+
+			scope.customers = customers;
+		});
+
+		// set timesheets
+	  for(var i=0; i<5; i++) {
+	  	getTimesheets(i, scope);
+	  }
+	};
+
 }]);
 
 timesheetsServices.service('UserService', ['$http', function($http){

@@ -3,9 +3,11 @@
 /* Controllers */
 var timesheetsControllers = angular.module('timesheetsApp.controllers', []);
 
-/* Login Controller */
-var LoginController = function($scope, $location, $modal, UserService) {
-	$scope.login = function() {
+/********************
+ * Login Controller *
+ ********************/
+ var LoginController = function($scope, $location, $modal, UserService) {
+ 	$scope.login = function() {
 		// clear error
 		$scope.loginEmailError = null;
 		$scope.loginPasswordError = null;
@@ -57,42 +59,44 @@ var LoginController = function($scope, $location, $modal, UserService) {
 			backdrop: 'static' // modal window is ont closed when clicking outside of the modal window
 		});
 	};
-};
 
-/* Create Account Modal Controller */
-var CreateAccountModalController = function ($scope, $modalInstance, UserService) {
-	$scope.errors = null;
+	/* Create Account Modal Controller */
+	var CreateAccountModalController = function ($scope, $modalInstance, UserService) {
+		$scope.errors = null;
 
-	$scope.create = function () {
-		var newPerson = {
-			Email: $('#inputEmail').val(),
-			FirstName: $('#inputFirstName').val(),
-			LastName: $('#inputLastName').val(),
-			Password: $('#inputPassword').val(),
-			ConfirmPassword: $('#inputConfirmPassword').val()
+		$scope.create = function () {
+			var newPerson = {
+				Email: $('#inputEmail').val(),
+				FirstName: $('#inputFirstName').val(),
+				LastName: $('#inputLastName').val(),
+				Password: $('#inputPassword').val(),
+				ConfirmPassword: $('#inputConfirmPassword').val()
+			};
+			var formData = JSON.stringify(newPerson);
+			UserService.register(formData, $modalInstance);
 		};
-		var formData = JSON.stringify(newPerson);
-		UserService.register(formData, $modalInstance);
+
+		$scope.cancelCreate = function () {
+			$modalInstance.dismiss('cancel');
+		};
 	};
 
-	$scope.cancelCreate = function () {
-		$modalInstance.dismiss('cancel');
-	};
-};
+	/* Forgot Password Modal Controller */
+	var ForgotPasswordModalController = function ($scope, $modalInstance, $http) {
+		$scope.sendEmail = function () {
+			$modalInstance.close();
+		};
 
-/* Forgot Password Modal Controller */
-var ForgotPasswordModalController = function ($scope, $modalInstance, $http) {
-	$scope.sendEmail = function () {
-		$modalInstance.close();
-	};
-
-	$scope.cancelSend = function () {
-		$modalInstance.dismiss('cancel');
+		$scope.cancelSend = function () {
+			$modalInstance.dismiss('cancel');
+		};
 	};
 };
 
-/* Main Controller */
-var MainController = function ($scope, $filter, $http, $location, UserService, DataService) {
+/*******************
+ * Main Controller *
+ *******************/
+ var MainController = function ($scope, $filter, $http, $location, UserService, DataService) {
 	// user authentication
 	var user = UserService.getUserData();
 	//if(!user.isAuthenticated) {
@@ -107,40 +111,54 @@ var MainController = function ($scope, $filter, $http, $location, UserService, D
 	};
 
 	// templates setting
-	$scope.templates = DataService.getTemplates();
-  $scope.template = $scope.templates[0];
+	DataService.populateData($scope);	
 
-  $scope.navClass = function (page) {
-  	var currentRoute = $location.path().substring(1) || 'overview';
+	$scope.navClass = function (page) {
+		var currentRoute = $location.path().substring(1) || 'overview';
 
-  	$.each($scope.templates, function(index, obj){
-  		if(obj.name == currentRoute) {
-  			$scope.template = obj;
-  		}
-  	});
+		$.each($scope.templates, function(index, obj){
+			if(obj.name == currentRoute) {
+				$scope.template = obj;
+			}
+		});
 
-  	return page === currentRoute ? 'active' : '';
-  }
+		return page === currentRoute ? 'active' : '';
+	}
 
   // table content setting
-  $scope.days = DataService.getDays();
-	$scope.projects = DataService.getProjects();
-  $scope.customers = DataService.getCustomers();
-
-  $scope.mondays = DataService.getTimesheets($scope.days[0]);
-  $scope.tuesdays = DataService.getTimesheets($scope.days[1]);
-  $scope.wednesdays = DataService.getTimesheets($scope.days[2]);
-  $scope.thursdays = DataService.getTimesheets($scope.days[3]);
-  $scope.fridays = DataService.getTimesheets($scope.days[4]);
-
   $scope.showCustomers = function(sheet) {
-    var selected = $filter('filter')($scope.customers, {id: sheet.customerId});
-    return (sheet.customer && selected.length) ? selected[0].name : 'Not set';
+  	var selected = $filter('filter')($scope.customers, {id: sheet.customerId});
+  	return (sheet.customer && selected.length) ? selected[0].name : 'Not set';
   };
 
   $scope.showProjects = function(sheet) {
-  	var selected = $filter('filter')($scope.projects, {id: sheet.projectId});
-  	return (sheet.project && selected.length) ? selected[0].name : 'Not set';
+  	//var selected = $filter('filter')($scope.projects, {id: sheet.projectId});
+  	//return (sheet.project && selected.length) ? selected[0].name : 'Not set';
+  };
+
+  $scope.removeSheet = function(index) {
+
+  };
+
+  $scope.addSheet = function () {
+  	var newsheet = {
+  		timesheetId: Math.floor((Math.random() * 100) + 1), 
+  		user: '', 
+  		day: $('#addsheetDay option:selected').text(),
+  		id: Math.floor((Math.random() * 100) + 1),
+  		customer: $('#addsheetCustomer option:selected').text(),
+  		customerId: 1,
+  		project: $('#addsheetProject option:selected').text(),
+  		projectId: 3,
+  		hour: $('#addsheetHour').val()
+  	};
+
+  	$scope.mondays.push(newsheet);
+  	console.log($scope.mondays);
+  };
+
+  $scope.cancelAdd = function () {
+  	$modalInstance.dismiss('cancel');
   };
 };
 

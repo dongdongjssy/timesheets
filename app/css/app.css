@@ -104,7 +104,7 @@
   font-size: 12px;
 }
 
-.validation-error-message {
+.validation-error-message, .form-label {
   margin-top: 10px;
   width: 150px;
   line-height: 2.5;
@@ -201,4 +201,12 @@ body {
 .table-timesheets tr th {
   background-color: #f5f5f5;
   vertical-align: middle !important;
+}
+
+.form-new-sheet {
+  padding: 5px 0px 20px 0px;
+}
+
+.form-new-sheet .form-group {
+  padding-right: 10px;
 }
