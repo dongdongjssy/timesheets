@@ -19,13 +19,13 @@
 
     <tr ng-repeat = "sheet in mondays">
       <td>
-        <span editable-select="sheet.customerId" e-ng-options="s.id as s.name for s in customers" e-form="rowform">
+        <span editable-select="sheet.customerId" e-ng-options="c.id as c.name for c in customers" e-name="customer" e-form="rowform">
           {{ showCustomers(sheet) }}
         </span>
       </td>
 
       <td>
-        <span editable-select="sheet.projectId" e-ng-options="s.id as s.name for s in projects" e-form="rowform">
+        <span editable-select="sheet.projectId" e-ng-options="p.id as p.name for p in projects" e-form="rowform">
           {{ showProjects(sheet) }}
         </span>
       </td>
