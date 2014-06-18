@@ -1,6 +1,6 @@
 'use strict';
 
-$(function () {
+$(document).ready(function(){
   // Disable caching for all AJAX requests (this is necessary to prevent IE from caching AJAX requests).
   $.ajaxSetup({
       cache:false
@@ -10,6 +10,7 @@ $(function () {
 // Declare app level module which depends on filters, and services
 var timesheetsApp = angular.module('timesheetsApp', [
 	'ngRoute',
+  'ngAnimate',
 	'xeditable',
 	'ui.bootstrap',
 	'timesheetsApp.filters',
@@ -89,6 +90,7 @@ timesheetsApp.config(['$routeProvider',
 	}
 ]);
 
-timesheetsApp.run(function(editableOptions){
+timesheetsApp.run(function(editableOptions, editableThemes){
+  editableThemes.bs3.buttonsClass='btn-sm';
   editableOptions.theme = 'bs3';
 });

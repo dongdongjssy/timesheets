@@ -96,7 +96,7 @@ var timesheetsControllers = angular.module('timesheetsApp.controllers', []);
 /*******************
  * Main Controller *
  *******************/
- var MainController = function ($scope, $filter, $http, $location, UserService, DataService) {
+var MainController = function ($scope, $filter, $http, $location, UserService, DataService) {
 	// user authentication
 	var user = UserService.getUserData();
 	//if(!user.isAuthenticated) {
@@ -140,6 +140,7 @@ var timesheetsControllers = angular.module('timesheetsApp.controllers', []);
 
   };
 
+  // add a new sheet
   $scope.addSheet = function () {
   	var newsheet = {
   		timesheetId: Math.floor((Math.random() * 100) + 1), 
@@ -154,11 +155,6 @@ var timesheetsControllers = angular.module('timesheetsApp.controllers', []);
   	};
 
   	$scope.mondays.push(newsheet);
-  	console.log($scope.mondays);
-  };
-
-  $scope.cancelAdd = function () {
-  	$modalInstance.dismiss('cancel');
   };
 };
 

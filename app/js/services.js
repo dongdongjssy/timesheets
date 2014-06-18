@@ -57,7 +57,8 @@ timesheetsServices.service('DataService', ['$http', function($http){
 
 	this.populateData = function(scope) {
 		// set days
-		scope.days = ['Monday','Tuesday','Wednesday','Thursday','Friday']; 
+		scope.days = ['Monday','Tuesday','Wednesday','Thursday','Friday'];
+		//scope.today = (new Date()).getDay();
 
 		// set templates
 		scope.templates = [ 

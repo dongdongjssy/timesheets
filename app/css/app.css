@@ -1,4 +1,6 @@
-/* MESSAGES AND ERRORS */
+/*************************
+ ** messages and errors **
+ *************************/
 .alert {
   padding: 8px;
 }
@@ -43,9 +45,9 @@
   margin-bottom: 5px;
 }
 
-/* 
- * login page 
- */
+/**************
+ * login page *
+ **************/
 .login-body {
   max-width: 400px;
   border-radius: 4px;
@@ -127,13 +129,14 @@
   background-color: #f5f5f5;
 }
 
-/*
- * main page 
- */
+/***************
+ ** main page **
+ ***************/
 body {
   padding-top: 50px;
 }
 
+/* nav bar and side bar section */
 .navbar {
   max-height: 50px;
 }
@@ -185,6 +188,7 @@ body {
   font-weight: bold;
 }
 
+/* main section */
 .main {
   padding: 20px;
 }
@@ -198,11 +202,16 @@ body {
   margin-top: 0;
 }
 
-.table-timesheets tr th {
-  background-color: #f5f5f5;
+/* time sheet table */
+.table-timesheets tr th, .table-timesheets tr td{
   vertical-align: middle !important;
 }
 
+.table-timesheets tr th {
+  background-color: #f5f5f5;
+}
+
+/* add new sheet form */
 .form-new-sheet {
   padding: 5px 0px 20px 0px;
 }
