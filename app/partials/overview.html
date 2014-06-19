@@ -59,10 +59,10 @@
   <table class="table table-bordered table-hover table-condensed table-timesheets">
     <tr>
       <th width="20%"></th>
-      <th>Customer</th>
-      <th>Project</th>
-      <th>Hour</th>
-      <th>Edit</th>
+      <th width="25%">Customer</th>
+      <th width="25%">Project</th>
+      <th width="10%">Hour</th>
+      <th width="20%">Edit</th>
     </tr>
 
     <!-- Monday task list -->
@@ -72,38 +72,48 @@
 
     <tr ng-repeat = "sheet in mondays">
       <td>
-        <span editable-select="sheet.customerId" e-ng-options="c.id as c.name for c in customers" e-name="customer" e-form="rowform">
-          {{ showCustomers(sheet) }}
-        </span>
+        <div id="displayMondayCustomer{{$index}}">{{sheet.customer}}</div>
+        <div id="editMondayCustomer{{$index}}" style="display:none;">
+          <select class="form-control" ng-model="mondayCustomer" 
+            ng-init = "mondayCustomer = findCustomer(sheet.customerId)"
+            ng-options="c.name for c in customers" 
+            ng-change="onChangeCustomer(sheet, mondayCustomer)" required>
+          </select>
+        </div>
       </td>
 
       <td>
-        <span ng-model="project" editable-select="sheet.projectId" e-ng-options="p.id as p.name for p in projects" e-form="rowform">
-          {{ showProjects(sheet) }}
-        </span>
+        <div id="displayMondayProject{{$index}}">{{sheet.project}}</div>
+        <div id="editMondayProject{{$index}}" style="display:none;">
+          <select class="form-control" ng-model="mondayProject"
+            ng-init = "mondayProject = findProject(sheet.customerId, sheet.projectId)"
+            ng-options="p.Name for p in findCustomer(sheet.customerId).projects" required>
+          </select>
+        </div>
       </td>
 
       <td>
-        <span editable-number="sheet.hour" e-form="rowform" e-required 
-          e-min="0" e-max="8" e-step="0.5">
-          {{ sheet.hour || 'empty'}}
-        </span>
+        <div id="displayMondayHour{{$index}}">{{sheet.hour}}</div>
+        <div id="editMondayHour{{$index}}" style="display:none;">
+          <input type="number" class="form-control" 
+            placeholder="Hour" min="0" max="8" step="0.5" value="{{sheet.hour}}" required />
+        </div>
       </td>
 
       <td style="white-space: nowrap">
-        <!-- form -->
-        <form editable-form name="rowform" ng-show="rowform.$visible">
-          <button class="btn btn-primary" type="submit" ng-disabled="rowform.$waiting || rowform.$invalid">
+        <div class="buttons" id="displayMondayButtons{{$index}}">
+          <button class="btn btn-primary" ng-click="editModel(sheet.day, $index)">Edit</button>
+          <button class="btn btn-danger" ng-click="removeSheet('mondays', sheet)">Delete</button>
+        </div>  
+        <div class="buttons" style="display:none;" id="editMondayButtons{{$index}}">
+          <button class="btn btn-primary" type="submit" 
+            ng-disabled="mondayProject.$invalid">
             <i class="glyphicon glyphicon-ok"></i>
           </button>
-          <button class="btn btn-default" type="button" ng-disabled="rowform.$waiting" ng-click="rowform.$cancel()">
+          <button class="btn btn-default" type="button" ng-click="displayModel(sheet.day, $index)">
             <i class="glyphicon glyphicon-remove"></i>
           </button>
-        </form>
-        <div class="buttons" ng-show="!rowform.$visible">
-          <button class="btn btn-primary" ng-click="rowform.$show()">Edit</button>
-          <button class="btn btn-danger" ng-click="removeUser($index)">Delete</button>
-        </div>  
+        </div>
       </td>
     </tr>
 

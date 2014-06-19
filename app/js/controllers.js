@@ -105,6 +105,7 @@ var MainController = function ($scope, $filter, $http, $location, UserService, D
 		$scope.user = user;
 	//}
 
+	// user log out
 	$scope.logout = function () {
 		user.isAuthenticated = false;
 		window.location = "#/login";
@@ -125,22 +126,7 @@ var MainController = function ($scope, $filter, $http, $location, UserService, D
 		return page === currentRoute ? 'active' : '';
 	}
 
-  // table content setting
-  $scope.showCustomers = function(sheet) {
-  	var selected = $filter('filter')($scope.customers, {id: sheet.customerId});
-  	return (sheet.customer && selected.length) ? selected[0].name : 'Not set';
-  };
-
-  $scope.showProjects = function(sheet) {
-  	//var selected = $filter('filter')($scope.projects, {id: sheet.projectId});
-  	//return (sheet.project && selected.length) ? selected[0].name : 'Not set';
-  };
-
-  $scope.removeSheet = function(index) {
-
-  };
-
-  // add a new sheet
+	// add a new sheet
   $scope.addSheet = function () {
   	var newsheet = {
   		timesheetId: Math.floor((Math.random() * 100) + 1), 
@@ -156,6 +142,52 @@ var MainController = function ($scope, $filter, $http, $location, UserService, D
 
   	$scope.mondays.push(newsheet);
   };
+
+	// table content setting
+	var elements = ['Buttons', 'Customer', 'Project', 'Hour'];
+	$scope.editModel = function(day, index) {
+		$.each(elements, function(i, obj){
+			$('#display' + day + obj + index).hide();
+			$('#edit' + day + obj + index).show();
+		});
+	};
+
+	$scope.displayModel = function(day, index) {
+		$.each(elements, function(i, obj){
+			$('#display' + day + obj + index).show();
+			$('#edit' + day + obj + index).hide();
+		});
+	};
+
+  $scope.removeSheet = function(index) {
+  };
+
+  // setting dropdown while change to edit model.
+  $scope.findCustomer = function(customerId) {
+  	for(var i=0; i<$scope.customers.length; i++) {
+  		if($scope.customers[i].id == customerId){
+  			return $scope.customers[i];
+  		}
+  	}
+  };
+
+  $scope.findProject = function(customerId, projectId) {
+  	var projects = $scope.findCustomer(customerId).projects;
+
+  	for(var i=0; i<projects.length; i++) {
+  		if(projects[i].Id == projectId) {
+  			return projects[i];
+  		}
+  	}
+
+  	return projects[0];
+  }
+
+  $scope.onChangeCustomer = function(sheet, customer) {
+  	sheet.customerId = customer.id;
+  	sheet.customerName = customer.name;
+  };
+
 };
 
 // Register controllers

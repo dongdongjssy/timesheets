@@ -8,28 +8,28 @@
       {
         "Id": 1,
         "TimesheetId": 1,
-        "ProjectName": "Project1",
+        "ProjectName": "Dell X108",
         "ProjectId": 1,
         "CustomerId": 1,
-        "CustomerName": "Customer1",
+        "CustomerName": "Dell",
         "Hours": 4
       },
       {
         "Id": 2,
         "TimesheetId": 1,
-        "ProjectName": "Project2",
+        "ProjectName": "XOOM\u2122 with WiFi",
         "ProjectId": 2,
-        "CustomerId": 1,
-        "CustomerName": "Customer1",
+        "CustomerId": 2,
+        "CustomerName": "Motorola",
         "Hours": 2
       },
       {
         "Id": 3,
         "TimesheetId": 1,
-        "ProjectName": "Project3",
+        "ProjectName": "Dell Streak",
         "ProjectId": 3,
-        "CustomerId": 2,
-        "CustomerName": "Customer2",
+        "CustomerId": 1,
+        "CustomerName": "Dell",
         "Hours": 2
       }
     ]
@@ -43,10 +43,10 @@
       {
         "Id": 4,
         "TimesheetId": 2,
-        "ProjectName": "Project2",
+        "ProjectName": "XOOM\u2122 with WiFi",
         "ProjectId": 2,
         "CustomerId": 2,
-        "CustomerName": "Customer2",
+        "CustomerName": "Motorola",
         "Hours": 8
       }
     ]
@@ -60,19 +60,19 @@
       {
         "Id": 5,
         "TimesheetId": 3,
-        "ProjectName": "Project1",
+        "ProjectName": "Dell X108",
         "ProjectId": 1,
         "CustomerId": 1,
-        "CustomerName": "Customer1",
+        "CustomerName": "Dell",
         "Hours": 4
       },
       {
         "Id": 6,
         "TimesheetId": 3,
-        "ProjectName": "Project3",
-        "ProjectId": 3,
-        "CustomerId": 2,
-        "CustomerName": "Customer2",
+        "ProjectName": "Galaxy Tab\u2122",
+        "ProjectId": 6,
+        "CustomerId": 3,
+        "CustomerName": "Samsung",
         "Hours": 4
       }
     ]
@@ -86,10 +86,10 @@
       {
         "Id": 7,
         "TimesheetId": 4,
-        "ProjectName": "Project2",
+        "ProjectName": "XOOM\u2122 with WiFi",
         "ProjectId": 2,
-        "CustomerId": 1,
-        "CustomerName": "Customer1",
+        "CustomerId": 2,
+        "CustomerName": "Motorola",
         "Hours": 8
       }
     ]
@@ -103,19 +103,19 @@
       {
         "Id": 8,
         "TimesheetId": 5,
-        "ProjectName": "Project1",
+        "ProjectName": "Dell X108",
         "ProjectId": 1,
         "CustomerId": 1,
-        "CustomerName": "Customer1",
+        "CustomerName": "Dell",
         "Hours": 4
       },
       {
         "Id": 9,
         "TimesheetId": 5,
-        "ProjectName": "Project3",
-        "ProjectId": 3,
-        "CustomerId": 2,
-        "CustomerName": "Customer2",
+        "ProjectName": "Transform",
+        "ProjectId": 9,
+        "CustomerId": 3,
+        "CustomerName": "Samsung",
         "Hours": 4
       }
     ]

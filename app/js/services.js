@@ -34,23 +34,27 @@ timesheetsServices.service('DataService', ['$http', function($http){
 			switch(index) {
 				case 0:
 					scope.mondays = timesheets;
+					scope.timesheets.push(scope.mondays);
 					break;
 				case 1:
 					scope.tuesdays = timesheets;
+					scope.timesheets.push(scope.tuesdays);
 					break;
 				case 2:
 					scope.wednesdays = timesheets;
+					scope.timesheets.push(scope.wednesdays);
 					break;
 				case 3:
 					scope.thursdays = timesheets;
+					scope.timesheets.push(scope.thursdays);
 					break;
 				case 4:
 					scope.fridays = timesheets;
+					scope.timesheets.push(scope.fridays);
 					break;
 				default:
 					break;
 			}
-
 		});
 
 	};
@@ -83,6 +87,7 @@ timesheetsServices.service('DataService', ['$http', function($http){
 		});
 
 		// set timesheets
+		scope.timesheets = [];
 	  for(var i=0; i<5; i++) {
 	  	getTimesheets(i, scope);
 	  }
