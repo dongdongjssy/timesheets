@@ -188,6 +188,44 @@ var MainController = function ($scope, $filter, $http, $location, UserService, D
   	sheet.customerName = customer.name;
   };
 
+  //x-editable test
+  $scope.showProject = function(sheet) {
+    var selected = $filter('filter')($scope.projects, {Id: sheet.projectId});
+    return selected.length ? selected[0].Name : 'Not set';
+  };
+
+  $scope.showCustomer = function(sheet) {
+    var selected = $filter('filter')($scope.customers, {id: sheet.customerId});
+    $scope.projects = selected[0].projects;
+    return selected.length ? selected[0].name : 'Not set';
+  };
+
+  $scope.onCustomerChange = function(index) {
+  	console.log($('#customer'+index + ' option: selected').text());
+  }
+
+  $scope.saveUser = function(data, id) {
+    //$scope.user not updated yet
+    angular.extend(data, {id: id});
+    return $http.post('/saveUser', data);
+  };
+
+  // remove user
+  $scope.removeUser = function(index) {
+    $scope.users.splice(index, 1);
+  };
+
+  // add user
+  $scope.addUser = function() {
+    $scope.inserted = {
+      id: $scope.users.length+1,
+      name: '',
+      status: null,
+      group: null 
+    };
+    $scope.users.push($scope.inserted);
+  };
+
 };
 
 // Register controllers

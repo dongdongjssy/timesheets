@@ -7,55 +7,106 @@
     <div class="form-group">
       <div>
         <select class="form-control" ng-model="addsheetDay" name="addsheetDay" id="addsheetDay" 
-          ng-options="d for d in days" required>
-          <option value="">-- choose day --</option>
-        </select>
-      </div>
+        ng-options="d for d in days" required>
+        <option value="">-- choose day --</option>
+      </select>
     </div>
+  </div>
 
-    <!-- Customer -->
-    <div class="form-group">
-      <div>
-        <select class="form-control" ng-model="addsheetCustomer" 
-          name="addsheetCustomer" id="addsheetCustomer"
-          ng-options="c.name for c in customers" required>
-          <option value="">-- choose customer --</option>
-        </select>
-      </div>
-    </div>
+  <!-- Customer -->
+  <div class="form-group">
+    <div>
+      <select class="form-control" ng-model="addsheetCustomer" 
+      name="addsheetCustomer" id="addsheetCustomer"
+      ng-options="c.name for c in customers" required>
+      <option value="">-- choose customer --</option>
+    </select>
+  </div>
+</div>
 
-    <!-- Project -->
-    <div class="form-group">
-      <div>
-        <select class="form-control" ng-model="addsheetProject" 
-          name="addsheetProject" id="addsheetProject"
-          ng-options="p.Name for p in addsheetCustomer.projects" required>
-          <option value="">-- choose project --</option>
-        </select>
-      </div>
-    </div>
+<!-- Project -->
+<div class="form-group">
+  <div>
+    <select class="form-control" ng-model="addsheetProject" 
+    name="addsheetProject" id="addsheetProject"
+    ng-options="p.Name for p in addsheetCustomer.projects" required>
+    <option value="">-- choose project --</option>
+  </select>
+</div>
+</div>
 
-    <!-- Hour -->
-    <div class="form-group"
-      ng-class="{'has-error':addSheetForm.inputHour.$invalid && addSheetForm.inputHour.$dirty}">
-      <div>
-        <input type="number" class="form-control" id="addsheetHour" name="inputHour" 
-         placeholder="Hour" ng-model="addsheetHour" min="0" max="8" step="0.5" required>
-        <span class="form-label">&nbsp;(0-8)</span>
-      </div>
-    </div>
+<!-- Hour -->
+<div class="form-group"
+ng-class="{'has-error':addSheetForm.inputHour.$invalid && addSheetForm.inputHour.$dirty}">
+<div>
+  <input type="number" class="form-control" id="addsheetHour" name="inputHour" 
+  placeholder="Hour" ng-model="addsheetHour" min="0" max="8" step="0.5" required>
+  <span class="form-label">&nbsp;(0-8)</span>
+</div>
+</div>
 
-    <div class="form-group">
-      <button class="btn btn-primary" type="submit" 
-        ng-disabled="addSheetForm.$invalid || addSheetForm.$pristine">Add
-      </button>
-    </div>
-  </form>
+<div class="form-group">
+  <button class="btn btn-primary" type="submit" 
+  ng-disabled="addSheetForm.$invalid || addSheetForm.$pristine">Add
+</button>
+</div>
+</form>
 </div>
 
 
 <div class="table-responsive">
   <h4>Time Sheet For This Week</h4>
+  <!-- x-editable table -->
+  <table class="table table-bordered table-hover table-condensed table-timesheets">
+    <tr>
+      <th width="20%"></th>
+      <th width="25%">Customer</th>
+      <th width="25%">Project</th>
+      <th width="10%">Hour</th>
+      <th width="20%">Edit</th>
+    </tr>
+
+    <!-- Monday task list -->
+    <tr>
+      <th rowspan='{{mondays.length + 1}}'>{{ days[0] }}</th>
+    </tr>
+
+    <tr ng-repeat = "sheet in mondays">
+      <td>
+        <span editable-select="sheet.customerId" e-name="customer" e-id="customer{{$index}}" e-form="rowform" e-ng-options="c.id as c.name for c in customers" e-ng-change="onCustomerChange($index)">
+          {{ showCustomer(sheet) }}
+        </span>
+      </td>
+
+      <td>
+        <span editable-select="sheet.projectId" e-name="project" e-form="rowform" e-ng-options="p.Id as p.Name for p in projects">
+          {{ showProject(sheet) }}
+        </span>
+      </td>
+
+      <td>
+        
+      </td>
+
+      <td style="white-space: nowrap">
+        <!-- form -->
+        <form editable-form name="rowform" onbeforesave="saveUser($data, user.id)" ng-show="rowform.$visible" class="form-buttons form-inline" shown="inserted == user">
+          <button type="submit" ng-disabled="rowform.$waiting" class="btn btn-primary">
+            save
+          </button>
+          <button type="button" ng-disabled="rowform.$waiting" ng-click="rowform.$cancel()" class="btn btn-default">
+            cancel
+          </button>
+        </form>
+        <div class="buttons" ng-show="!rowform.$visible">
+          <button class="btn btn-primary" ng-click="rowform.$show()">edit</button>
+          <button class="btn btn-danger" ng-click="removeUser($index)">del</button>
+        </div>  
+      </td>
+    </tr>
+  </table>
+
+  <!-- customized table -->
   <table class="table table-bordered table-hover table-condensed table-timesheets">
     <tr>
       <th width="20%"></th>
