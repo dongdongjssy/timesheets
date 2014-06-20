@@ -129,53 +129,118 @@ var MainController = function ($scope, $filter, $http, $location, UserService, D
 	// add a new sheet
   $scope.addSheet = function () {
   	var newsheet = {
-  		timesheetId: Math.floor((Math.random() * 100) + 1), 
-  		user: '', 
+  		timesheetId: Math.floor((Math.random() * 1000) + 1), 
+  		userName: '', 
   		day: $('#addsheetDay option:selected').text(),
-  		id: Math.floor((Math.random() * 100) + 1),
-  		customer: $('#addsheetCustomer option:selected').text(),
-  		customerId: 1,
-  		project: $('#addsheetProject option:selected').text(),
-  		projectId: 3,
+  		entryId: Math.floor((Math.random() * 1000) + 1),
+  		customerName: $('#addsheetCustomer option:selected').text(),
+  		customerId: findCustomerByName($('#addsheetCustomer option:selected').text()).customerId,
+  		projectName: $('#addsheetProject option:selected').text(),
+  		projectId: '',
   		hour: $('#addsheetHour').val()
   	};
 
-  	$scope.mondays.push(newsheet);
+  	if(newsheet.day == $scope.days[0]){
+  		$scope.mondays.push(newsheet);
+  	}
+  	//$scope.mondays.push(newsheet);
   };
 
 	// table content setting
+
+	// toggle between edit and display model
 	var elements = ['Buttons', 'Customer', 'Project', 'Hour'];
-	$scope.editModel = function(day, index) {
+	$scope.editModel = function(sheet, index) {
+		$scope.lastModifiedSheet = {
+			customerName: sheet.customerName,
+			customerId: sheet.customerId,
+			projectName: sheet.projectName,
+			projectId: sheet.projectId,
+			hour: sheet.hour
+		};
 		$.each(elements, function(i, obj){
-			$('#display' + day + obj + index).hide();
-			$('#edit' + day + obj + index).show();
+			$('#display' + sheet.day + obj + index).hide();
+			$('#edit' + sheet.day + obj + index).show();
 		});
 	};
 
-	$scope.displayModel = function(day, index) {
+	$scope.displayModel = function(sheet, index) {
+		// cacel edit and restore the sheet
+		sheet.customerName = $scope.lastModifiedSheet.customerName;
+		sheet.customerId = $scope.lastModifiedSheet.customerId;
+		sheet.projectName = $scope.lastModifiedSheet.projectName;
+		sheet.projectId = $scope.lastModifiedSheet.projectId;
+		sheet.hour = $scope.lastModifiedSheet.hour;
+
 		$.each(elements, function(i, obj){
-			$('#display' + day + obj + index).show();
-			$('#edit' + day + obj + index).hide();
+			$('#display' + sheet.day + obj + index).show();
+			$('#edit' + sheet.day + obj + index).hide();
 		});
 	};
 
-  $scope.removeSheet = function(index) {
+  // set new value for a sheet
+	function setSheet(sheet, customer, project, hour) {
+		sheet.customerName = customer.customerName;
+		sheet.customerId = customer.customerId;
+		sheet.projectName = project.projectName;
+		sheet.projectId = project.projectId;
+		sheet.hour = hour;
+		//TBD: save to database
+	}
+
+	$scope.modifySheet = function(customer, project, hour, day, index) {
+		switch(day){
+			case 0:
+				setSheet($scope.mondays[index], customer, project, hour);
+				$scope.displayModel($scope.days[0], index);
+				break;
+			case 1:
+				setSheet($scope.tuesdays[index], customer, project, hour);
+				$scope.displayModel($scope.days[1], index);
+				break;
+			case 2:
+				setSheet($scope.wednesdays[index], customer, project, hour);
+				$scope.displayModel($scope.days[2], index);
+				break;
+			case 3:
+				setSheet($scope.thursdays[index], customer, project, hour);
+				$scope.displayModel($scope.days[3], index);
+				break;
+			case 4:
+				setSheet($scope.fridays[index], customer, project, hour);
+				$scope.displayModel($scope.days[4], index);
+				break;
+		}
+	};
+
+	// delete a sheet
+  $scope.removeSheet = function(index, sheet) {
+  	if(index == 0) {
+  	}
   };
 
   // setting dropdown while change to edit model.
   $scope.findCustomer = function(customerId) {
   	for(var i=0; i<$scope.customers.length; i++) {
-  		if($scope.customers[i].id == customerId){
+  		if($scope.customers[i].customerId == customerId){
   			return $scope.customers[i];
   		}
   	}
   };
 
+  function findCustomerByName(customerName) {
+  	for(var i=0; i<$scope.customers.length; i++) {
+  		if($scope.customers[i].customerName == customerName){
+  			return $scope.customers[i];
+  		}
+  	}
+  }
+
   $scope.findProject = function(customerId, projectId) {
   	var projects = $scope.findCustomer(customerId).projects;
 
   	for(var i=0; i<projects.length; i++) {
-  		if(projects[i].Id == projectId) {
+  		if(projects[i].projectId == projectId) {
   			return projects[i];
   		}
   	}
@@ -184,48 +249,9 @@ var MainController = function ($scope, $filter, $http, $location, UserService, D
   }
 
   $scope.onChangeCustomer = function(sheet, customer) {
-  	sheet.customerId = customer.id;
-  	sheet.customerName = customer.name;
+  	sheet.customerId = customer.customerId;
+  	sheet.customerName = customer.customerName;
   };
-
-  //x-editable test
-  $scope.showProject = function(sheet) {
-    var selected = $filter('filter')($scope.projects, {Id: sheet.projectId});
-    return selected.length ? selected[0].Name : 'Not set';
-  };
-
-  $scope.showCustomer = function(sheet) {
-    var selected = $filter('filter')($scope.customers, {id: sheet.customerId});
-    $scope.projects = selected[0].projects;
-    return selected.length ? selected[0].name : 'Not set';
-  };
-
-  $scope.onCustomerChange = function(index) {
-  	console.log($('#customer'+index + ' option: selected').text());
-  }
-
-  $scope.saveUser = function(data, id) {
-    //$scope.user not updated yet
-    angular.extend(data, {id: id});
-    return $http.post('/saveUser', data);
-  };
-
-  // remove user
-  $scope.removeUser = function(index) {
-    $scope.users.splice(index, 1);
-  };
-
-  // add user
-  $scope.addUser = function() {
-    $scope.inserted = {
-      id: $scope.users.length+1,
-      name: '',
-      status: null,
-      group: null 
-    };
-    $scope.users.push($scope.inserted);
-  };
-
 };
 
 // Register controllers

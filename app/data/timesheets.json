@@ -1,122 +1,122 @@
 [
   {
-    "Id": 1,
-    "ApplicationUserId": 1,
-    "ApplicationUserName": "User1",
-    "Date": "Monday",
-    "Entries": [
+    "timesheetId": 1,
+    "userId": 1,
+    "userName": "User1",
+    "day": "Monday",
+    "entries": [
       {
-        "Id": 1,
-        "TimesheetId": 1,
-        "ProjectName": "Dell X108",
-        "ProjectId": 1,
-        "CustomerId": 1,
-        "CustomerName": "Dell",
-        "Hours": 4
+        "entryId": 1,
+        "timesheetId": 1,
+        "projectName": "Dell X108",
+        "projectId": 1,
+        "customerId": 1,
+        "customerName": "Dell",
+        "hour": 4
       },
       {
-        "Id": 2,
-        "TimesheetId": 1,
-        "ProjectName": "XOOM\u2122 with WiFi",
-        "ProjectId": 2,
-        "CustomerId": 2,
-        "CustomerName": "Motorola",
-        "Hours": 2
+        "entryId": 2,
+        "timesheetId": 1,
+        "projectName": "XOOM\u2122 with WiFi",
+        "projectId": 2,
+        "customerId": 2,
+        "customerName": "Motorola",
+        "hour": 2
       },
       {
-        "Id": 3,
-        "TimesheetId": 1,
-        "ProjectName": "Dell Streak",
-        "ProjectId": 3,
-        "CustomerId": 1,
-        "CustomerName": "Dell",
-        "Hours": 2
+        "entryId": 3,
+        "timesheetId": 1,
+        "projectName": "Dell Streak",
+        "projectId": 3,
+        "customerId": 1,
+        "customerName": "Dell",
+        "hour": 2
       }
     ]
   },
   {
-    "Id": 2,
-    "ApplicationUserId": 1,
-    "ApplicationUserName": "User1",
-    "Date": "Tuesday",
-    "Entries": [
+    "timesheetId": 2,
+    "userId": 1,
+    "userName": "User1",
+    "day": "Tuesday",
+    "entries": [
       {
-        "Id": 4,
-        "TimesheetId": 2,
-        "ProjectName": "XOOM\u2122 with WiFi",
-        "ProjectId": 2,
-        "CustomerId": 2,
-        "CustomerName": "Motorola",
-        "Hours": 8
+        "entryId": 4,
+        "timesheetId": 2,
+        "projectName": "XOOM\u2122 with WiFi",
+        "projectId": 2,
+        "customerId": 2,
+        "customerName": "Motorola",
+        "hour": 8
       }
     ]
   },
   {
-    "Id": 3,
-    "ApplicationUserId": 1,
-    "ApplicationUserName": "User1",
-    "Date": "Wednesday",
-    "Entries": [
+    "timesheetId": 3,
+    "userId": 1,
+    "userName": "User1",
+    "day": "Wednesday",
+    "entries": [
       {
-        "Id": 5,
-        "TimesheetId": 3,
-        "ProjectName": "Dell X108",
-        "ProjectId": 1,
-        "CustomerId": 1,
-        "CustomerName": "Dell",
-        "Hours": 4
+        "entryId": 5,
+        "timesheetId": 3,
+        "projectName": "Dell X108",
+        "projectId": 1,
+        "customerId": 1,
+        "customerName": "Dell",
+        "hour": 4
       },
       {
-        "Id": 6,
-        "TimesheetId": 3,
-        "ProjectName": "Galaxy Tab\u2122",
-        "ProjectId": 6,
-        "CustomerId": 3,
-        "CustomerName": "Samsung",
-        "Hours": 4
+        "entryId": 6,
+        "timesheetId": 3,
+        "projectName": "Galaxy Tab\u2122",
+        "projectId": 6,
+        "customerId": 3,
+        "customerName": "Samsung",
+        "hour": 4
       }
     ]
   },
   {
-    "Id": 4,
-    "ApplicationUserId": 1,
-    "ApplicationUserName": "User1",
-    "Date": "Thursday",
-    "Entries": [
+    "timesheetId": 4,
+    "userId": 1,
+    "userName": "User1",
+    "day": "Thursday",
+    "entries": [
       {
-        "Id": 7,
-        "TimesheetId": 4,
-        "ProjectName": "XOOM\u2122 with WiFi",
-        "ProjectId": 2,
-        "CustomerId": 2,
-        "CustomerName": "Motorola",
-        "Hours": 8
+        "entryId": 7,
+        "timesheetId": 4,
+        "projectName": "XOOM\u2122 with WiFi",
+        "projectId": 2,
+        "customerId": 2,
+        "customerName": "Motorola",
+        "hour": 8
       }
     ]
   },
   {
-    "Id": 5,
-    "ApplicationUserId": 1,
-    "ApplicationUserName": "User1",
-    "Date": "Friday",
-    "Entries": [
+    "timesheetId": 5,
+    "userId": 1,
+    "userName": "User1",
+    "day": "Friday",
+    "entries": [
       {
-        "Id": 8,
-        "TimesheetId": 5,
-        "ProjectName": "Dell X108",
-        "ProjectId": 1,
-        "CustomerId": 1,
-        "CustomerName": "Dell",
-        "Hours": 4
+        "entryId": 8,
+        "timesheetId": 5,
+        "projectName": "Dell X108",
+        "projectId": 1,
+        "customerId": 1,
+        "customerName": "Dell",
+        "hour": 4
       },
       {
-        "Id": 9,
-        "TimesheetId": 5,
-        "ProjectName": "Transform",
-        "ProjectId": 9,
-        "CustomerId": 3,
-        "CustomerName": "Samsung",
-        "Hours": 4
+        "entryId": 9,
+        "timesheetId": 5,
+        "projectName": "Transform",
+        "projectId": 9,
+        "customerId": 3,
+        "customerName": "Samsung",
+        "hour": 4
       }
     ]
   }

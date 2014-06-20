@@ -14,18 +14,18 @@ timesheetsServices.service('DataService', ['$http', function($http){
 			var timesheets = [];
 
 			$.each(data, function(i, timesheet) {
-				if(timesheet.Date === scope.days[index]){
-					$.each(timesheet.Entries, function(j, entry) {
+				if(timesheet.day === scope.days[index]){
+					$.each(timesheet.entries, function(j, entry) {
 						timesheets.push({
-							timesheetId: timesheet.Id, 
-							user: timesheet.ApplicationUserName, 
-							day: timesheet.Date,
-							id: entry.Id,
-							customer: entry.CustomerName,
-							customerId: entry.CustomerId,
-							project: entry.ProjectName,
-							projectId: entry.ProjectId,
-							hour: entry.Hours
+							timesheetId: timesheet.timesheetId, 
+							userName: timesheet.userName, 
+							day: timesheet.day,
+							entryId: entry.entryId,
+							customerName: entry.customerName,
+							customerId: entry.customerId,
+							projectName: entry.projectName,
+							projectId: entry.projectId,
+							hour: entry.hour
 						});
 					});
 				}
@@ -72,6 +72,7 @@ timesheetsServices.service('DataService', ['$http', function($http){
 			{ name: 'export', url: 'partials/export.html'} 
 		];
 
+		// default template: overview page
 		scope.template = scope.templates[0];
 
 		// set customers
@@ -80,7 +81,7 @@ timesheetsServices.service('DataService', ['$http', function($http){
 			var customers = [];
 
 			$.each(data, function(index, obj) {
-				customers.push({ id: obj.Id, name: obj.Name, projects: obj.Projects });
+				customers.push(obj);
 			});
 
 			scope.customers = customers;

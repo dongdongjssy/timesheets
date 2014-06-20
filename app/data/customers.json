@@ -1,29 +1,29 @@
 [
   {
-    "Id": 1,
-    "Name": "Dell",
-    "Projects": [
-      {"Id":1, "Name": "Dell X108"},
-      {"Id":3, "Name": "Dell Streak"},
-      {"Id":4, "Name": "Dell Venue"}
+    "customerId": 1,
+    "customerName": "Dell",
+    "projects": [
+      {"projectId":1, "projectName": "Dell X108"},
+      {"projectId":3, "projectName": "Dell Streak"},
+      {"projectId":4, "projectName": "Dell Venue"}
     ]
   },
   {
-    "Id": 2,
-    "Name": "Motorola",
-    "Projects": [
-      {"Id": 2, "Name": "XOOM\u2122 with WiFi"},
-      {"Id": 5, "Name": "ATRIX\u2122 4G"}
+    "customerId": 2,
+    "customerName": "Motorola",
+    "projects": [
+      {"projectId": 2, "projectName": "XOOM\u2122 with WiFi"},
+      {"projectId": 5, "projectName": "ATRIX\u2122 4G"}
     ]
   },
   {
-    "Id": 3,
-    "Name": "Samsung",
-    "Projects": [
-      {"Id": 6, "Name": "Galaxy Tab\u2122"},
-      {"Id": 7, "Name": "Galaxy S\u2122"},
-      {"Id": 8, "Name": "Mesmerize"},
-      {"Id": 9, "Name": "Transform"}
+    "customerId": 3,
+    "customerName": "Samsung",
+    "projects": [
+      {"projectId": 6, "projectName": "Galaxy Tab\u2122"},
+      {"projectId": 7, "projectName": "Galaxy S\u2122"},
+      {"projectId": 8, "projectName": "Mesmerize"},
+      {"projectId": 9, "projectName": "Transform"}
     ]
   }
 ]
