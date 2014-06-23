@@ -1,32 +1,32 @@
 [
 	{
-		"Email": "user1@timesheets.com",
-		"FirstName": "User1",
-		"LastName": "Test",
-		"Password": "pwd123PWD!"
+		"email": "user1@timesheets.com",
+		"firstname": "User1",
+		"lastname": "Test",
+		"password": "pwd123PWD!"
 	},
 	{
-		"Email": "user2@timesheets.com",
-		"FirstName": "User2",
-		"LastName": "Test",
-		"Password": "pwd123PWD!"
+		"email": "user2@timesheets.com",
+		"firstname": "User2",
+		"lastname": "Test",
+		"password": "pwd123PWD!"
 	},
 	{
-		"Email": "user3@timesheets.com",
-		"FirstName": "User3",
-		"LastName": "Test",
-		"Password": "pwd123PWD!"
+		"email": "user3@timesheets.com",
+		"firstname": "User3",
+		"lastname": "Test",
+		"password": "pwd123PWD!"
 	},
 	{
-		"Email": "user4@timesheets.com",
-		"FirstName": "User4",
-		"LastName": "Test",
-		"Password": "pwd123PWD!"
+		"email": "user4@timesheets.com",
+		"firstname": "User4",
+		"lastname": "Test",
+		"password": "pwd123PWD!"
 	},
 	{
-		"Email": "user5@timesheets.com",
-		"FirstName": "User5",
-		"LastName": "Test",
-		"Password": "pwd123PWD!"
+		"email": "user5@timesheets.com",
+		"firstname": "User5",
+		"lastname": "Test",
+		"password": "pwd123PWD!"
 	}
 ]

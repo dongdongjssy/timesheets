@@ -68,10 +68,10 @@
 
     <!-- Monday task list -->
     <tr>
-      <th rowspan='{{mondays.length + 1}}'>{{ days[0] }}</th>
+      <th rowspan='{{timesheets[0].length + 1}}'>{{ days[0] }}</th>
     </tr>
 
-    <tr ng-repeat = "sheet in mondays">
+    <tr ng-repeat = "sheet in timesheets[0]">
       <td>
         <div id="displayMondayCustomer{{$index}}">{{sheet.customerName}}</div>
         <div id="editMondayCustomer{{$index}}" style="display:none;">
@@ -105,14 +105,69 @@
       <td style="white-space: nowrap">
         <div class="buttons" id="displayMondayButtons{{$index}}">
           <button class="btn btn-primary" ng-click="editModel(sheet, $index)">Edit</button>
-          <button class="btn btn-danger" ng-click="removeSheet(0, sheet)">Delete</button>
+          <button class="btn btn-danger" ng-click="removeSheet(0, $index)">Delete</button>
         </div>  
         <div class="buttons" style="display:none;" id="editMondayButtons{{$index}}">
-          <button class="btn btn-primary" type="submit" 
-            ng-click="modifySheet(mondayCustomer, mondayProject, mondayHour, 0, $index)">
+          <button class="btn btn-primary" type="button" 
+            ng-click="displayModel(sheet,mondayCustomer,mondayProject,mondayHour,$index,true)">
             <i class="glyphicon glyphicon-ok"></i>
           </button>
-          <button class="btn btn-default" type="button" ng-click="displayModel(sheet, $index)">
+          <button class="btn btn-default" type="button" 
+            ng-click="displayModel(sheet,null,null,null,$index,false)">
+            <i class="glyphicon glyphicon-remove"></i>
+          </button>
+        </div>
+      </td>
+    </tr>
+
+    <!-- Tuesday task list -->
+    <tr>
+      <th rowspan='{{timesheets[1].length + 1}}'>{{ days[1] }}</th>
+    </tr>
+
+    <tr ng-repeat = "sheet in timesheets[1]">
+      <td>
+        <div id="displayTuesdayCustomer{{$index}}">{{sheet.customerName}}</div>
+        <div id="editTuesdayCustomer{{$index}}" style="display:none;">
+          <select class="form-control" ng-model="tuesdayCustomer"
+            ng-init = "tuesdayCustomer = findCustomer(sheet.customerId)"
+            ng-options="c.customerName for c in customers" 
+            ng-change="onChangeCustomer(sheet, tuesdayCustomer)" required>
+          </select>
+        </div>
+      </td>
+
+      <td>
+        <div id="displayTuesdayProject{{$index}}">{{sheet.projectName}}</div>
+        <div id="editTuesdayProject{{$index}}" style="display:none;">
+          <select class="form-control" ng-model="tuesdayProject" name="tuesdayProject{{$index}}"
+            ng-init = "tuesdayProject = findProject(sheet.customerId, sheet.projectId)"
+            ng-options="p.projectName for p in findCustomer(sheet.customerId).projects" required>
+            <option value="">-- choose project --</option>
+          </select>
+        </div>
+      </td>
+
+      <td>
+        <div id="displayTuesdayHour{{$index}}">{{sheet.hour}}</div>
+        <div id="editTuesdayHour{{$index}}" style="display:none;">
+          <input type="number" class="form-control" ng-model="tuesdayHour"
+            placeholder="Hour" min="0" max="8" step="0.5" value="{{sheet.hour}}" required />
+        </div>
+      </td>
+
+      <td style="white-space: nowrap">
+        <div class="buttons" id="displayTuesdayButtons{{$index}}">
+          <button class="btn btn-primary" ng-click="editModel(sheet, $index)">Edit</button>
+          <button class="btn btn-danger" ng-click="removeSheet(1, $index)">Delete</button>
+        </div>  
+        <div class="buttons" style="display:none;" id="editTuesdayButtons{{$index}}">
+          <button class="btn btn-primary" type="button" 
+            ng-click="displayModel(sheet,tuesdayCustomer,tuesdayProject,tuesdayHour,$index,true)">
+            <i class="glyphicon glyphicon-ok"></i>
+          </button>
+          <button class="btn btn-default" type="button" 
+            ng-click="displayModel(sheet,null,null,null,$index,false)">
             <i class="glyphicon glyphicon-remove"></i>
           </button>
         </div>

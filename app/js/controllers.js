@@ -97,13 +97,16 @@ var timesheetsControllers = angular.module('timesheetsApp.controllers', []);
  * Main Controller *
  *******************/
 var MainController = function ($scope, $filter, $http, $location, UserService, DataService) {
+	// populate data for application
+	DataService.populateData($scope);	
+
 	// user authentication
 	var user = UserService.getUserData();
-	//if(!user.isAuthenticated) {
-	//	window.location = "#/login";
-	//} else {
+	if(!user.isAuthenticated) {
+		window.location = "#/login";
+	} else {
 		$scope.user = user;
-	//}
+	}
 
 	// user log out
 	$scope.logout = function () {
@@ -111,9 +114,7 @@ var MainController = function ($scope, $filter, $http, $location, UserService, D
 		window.location = "#/login";
 	};
 
-	// templates setting
-	DataService.populateData($scope);	
-
+  // side bar navigation
 	$scope.navClass = function (page) {
 		var currentRoute = $location.path().substring(1) || 'overview';
 
@@ -129,10 +130,7 @@ var MainController = function ($scope, $filter, $http, $location, UserService, D
 	// add a new sheet
   $scope.addSheet = function () {
   	var newsheet = {
-  		timesheetId: Math.floor((Math.random() * 1000) + 1), 
-  		userName: '', 
   		day: $('#addsheetDay option:selected').text(),
-  		entryId: Math.floor((Math.random() * 1000) + 1),
   		customerName: $('#addsheetCustomer option:selected').text(),
   		customerId: findCustomerByName($('#addsheetCustomer option:selected').text()).customerId,
   		projectName: $('#addsheetProject option:selected').text(),
@@ -140,13 +138,9 @@ var MainController = function ($scope, $filter, $http, $location, UserService, D
   		hour: $('#addsheetHour').val()
   	};
 
-  	if(newsheet.day == $scope.days[0]){
-  		$scope.mondays.push(newsheet);
-  	}
-  	//$scope.mondays.push(newsheet);
+  	$scope.timesheets[$('#addsheetDay').val()].push(newsheet);
+  	/* T.B.D: Add to database */
   };
-
-	// table content setting
 
 	// toggle between edit and display model
 	var elements = ['Buttons', 'Customer', 'Project', 'Hour'];
@@ -158,19 +152,29 @@ var MainController = function ($scope, $filter, $http, $location, UserService, D
 			projectId: sheet.projectId,
 			hour: sheet.hour
 		};
+
 		$.each(elements, function(i, obj){
 			$('#display' + sheet.day + obj + index).hide();
 			$('#edit' + sheet.day + obj + index).show();
 		});
 	};
 
-	$scope.displayModel = function(sheet, index) {
-		// cacel edit and restore the sheet
-		sheet.customerName = $scope.lastModifiedSheet.customerName;
-		sheet.customerId = $scope.lastModifiedSheet.customerId;
-		sheet.projectName = $scope.lastModifiedSheet.projectName;
-		sheet.projectId = $scope.lastModifiedSheet.projectId;
-		sheet.hour = $scope.lastModifiedSheet.hour;
+	$scope.displayModel = function(sheet, customer, project, hour, index, saveChange) {
+		if(!saveChange) {
+			// cacel edit and restore the sheet
+			sheet.customerName = $scope.lastModifiedSheet.customerName;
+			sheet.customerId = $scope.lastModifiedSheet.customerId;
+			sheet.projectName = $scope.lastModifiedSheet.projectName;
+			sheet.projectId = $scope.lastModifiedSheet.projectId;
+			sheet.hour = $scope.lastModifiedSheet.hour;
+		} else {
+			sheet.customerName = customer.customerName;
+			sheet.customerId = customer.customerId;
+			sheet.projectName = project.projectName;
+			sheet.projectId = project.projectId;
+			sheet.hour = hour;
+			/* T.B.D: save to database */
+		}
 
 		$.each(elements, function(i, obj){
 			$('#display' + sheet.day + obj + index).show();
@@ -178,45 +182,10 @@ var MainController = function ($scope, $filter, $http, $location, UserService, D
 		});
 	};
 
-  // set new value for a sheet
-	function setSheet(sheet, customer, project, hour) {
-		sheet.customerName = customer.customerName;
-		sheet.customerId = customer.customerId;
-		sheet.projectName = project.projectName;
-		sheet.projectId = project.projectId;
-		sheet.hour = hour;
-		//TBD: save to database
-	}
-
-	$scope.modifySheet = function(customer, project, hour, day, index) {
-		switch(day){
-			case 0:
-				setSheet($scope.mondays[index], customer, project, hour);
-				$scope.displayModel($scope.days[0], index);
-				break;
-			case 1:
-				setSheet($scope.tuesdays[index], customer, project, hour);
-				$scope.displayModel($scope.days[1], index);
-				break;
-			case 2:
-				setSheet($scope.wednesdays[index], customer, project, hour);
-				$scope.displayModel($scope.days[2], index);
-				break;
-			case 3:
-				setSheet($scope.thursdays[index], customer, project, hour);
-				$scope.displayModel($scope.days[3], index);
-				break;
-			case 4:
-				setSheet($scope.fridays[index], customer, project, hour);
-				$scope.displayModel($scope.days[4], index);
-				break;
-		}
-	};
-
 	// delete a sheet
-  $scope.removeSheet = function(index, sheet) {
-  	if(index == 0) {
-  	}
+  $scope.removeSheet = function(day, index) {
+  	/* T.B.D: remove frome database */
+  	$scope.timesheets[day].splice(index, 1);
   };
 
   // setting dropdown while change to edit model.
@@ -262,4 +231,3 @@ timesheetsControllers.controller(
 timesheetsControllers.controller(
 	'MainController', 
 	['$scope', '$filter', '$http', '$location', 'UserService', 'DataService', MainController]);
-
