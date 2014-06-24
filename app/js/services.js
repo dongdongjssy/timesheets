@@ -85,7 +85,7 @@ timesheetsServices.service('DataService', ['$http', function($http){
 	};
 }]);// end data service
 
-timesheetsServices.service('UserService', ['$http', function($http){
+timesheetsServices.service('UserService', ['$http', '$cookieStore', function($http, $cookieStore){
 
 	var userData = {
 		isAuthenticated: false,
@@ -94,22 +94,30 @@ timesheetsServices.service('UserService', ['$http', function($http){
 		expirationDate: null
 	};
 
+	this.getUserData = function() { return userData; }
+
 	// authenticate user
-	this.authenticate = function(email, password) {
+	this.authenticate = function(email, password, successCallback, errorCallback) {
 		$http({method: 'GET', url: 'data/accounts.json'})
 		.success(function(data){
 			$.each(data, function(index, obj){
 				if(obj.email == email && obj.password == password) {
 					console.log("Login success as [" + obj.email + ", " + obj.password + "]");
 					userData.isAuthenticated = true;
-					userData.username = obj.firstname + " " + lastname;
+					userData.username = obj.firstname + " " + obj.lastname;
 
-					return userData;
+					$cookieStore.put('userData', userData);
+
+					if(typeof successCallback === 'function') {
+						successCallback();
+					}
 				}
 			});
 		})
-		.error(function(status) {
-			console.log(status);
+		.error(function(data) {
+			if(typeof errorCallback === 'function') {
+				errorCallback();
+			}
 		});
 	};
 
@@ -137,5 +145,4 @@ timesheetsServices.service('UserService', ['$http', function($http){
 		});
 	};
 
-	this.getUserData = function() { return userData; }
 }]);// end user service

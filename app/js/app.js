@@ -10,8 +10,8 @@ $(document).ready(function(){
 // Declare app level module which depends on filters, and services
 var timesheetsApp = angular.module('timesheetsApp', [
 	'ngRoute',
+  'ngCookies',
   'ngAnimate',
-	'xeditable',
 	'ui.bootstrap',
 	'timesheetsApp.filters',
 	'timesheetsApp.services',
@@ -89,8 +89,3 @@ timesheetsApp.config(['$routeProvider',
 		.otherwise({redirectTo: '/login'});
 	}
 ]);
-
-timesheetsApp.run(function(editableOptions, editableThemes){
-  editableThemes.bs3.buttonsClass='btn-sm';
-  editableOptions.theme = 'bs3';
-});

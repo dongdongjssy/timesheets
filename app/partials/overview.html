@@ -173,6 +173,168 @@
         </div>
       </td>
     </tr>
+
+    <!-- Wednesday task list -->
+    <tr>
+      <th rowspan='{{timesheets[2].length + 1}}'>{{ days[2] }}</th>
+    </tr>
+
+    <tr ng-repeat = "sheet in timesheets[2]">
+      <td>
+        <div id="displayWednesdayCustomer{{$index}}">{{sheet.customerName}}</div>
+        <div id="editWednesdayCustomer{{$index}}" style="display:none;">
+          <select class="form-control" ng-model="wednesdayCustomer"
+            ng-init = "wednesdayCustomer = findCustomer(sheet.customerId)"
+            ng-options="c.customerName for c in customers" 
+            ng-change="onChangeCustomer(sheet, wednesdayCustomer)" required>
+          </select>
+        </div>
+      </td>
+
+      <td>
+        <div id="displayWednesdayProject{{$index}}">{{sheet.projectName}}</div>
+        <div id="editWednesdayProject{{$index}}" style="display:none;">
+          <select class="form-control" ng-model="wednesdayProject" name="wednesdayProject{{$index}}"
+            ng-init = "wednesdayProject = findProject(sheet.customerId, sheet.projectId)"
+            ng-options="p.projectName for p in findCustomer(sheet.customerId).projects" required>
+            <option value="">-- choose project --</option>
+          </select>
+        </div>
+      </td>
+
+      <td>
+        <div id="displayWednesdayHour{{$index}}">{{sheet.hour}}</div>
+        <div id="editWednesdayHour{{$index}}" style="display:none;">
+          <input type="number" class="form-control" ng-model="wednesdayHour"
+            placeholder="Hour" min="0" max="8" step="0.5" value="{{sheet.hour}}" required />
+        </div>
+      </td>
+
+      <td style="white-space: nowrap">
+        <div class="buttons" id="displayWednesdayButtons{{$index}}">
+          <button class="btn btn-primary" ng-click="editModel(sheet, $index)">Edit</button>
+          <button class="btn btn-danger" ng-click="removeSheet(2, $index)">Delete</button>
+        </div>  
+        <div class="buttons" style="display:none;" id="editWednesdayButtons{{$index}}">
+          <button class="btn btn-primary" type="button" 
+            ng-click="displayModel(sheet,wednesdayCustomer,wednesdayProject,wednesdayHour,$index,true)">
+            <i class="glyphicon glyphicon-ok"></i>
+          </button>
+          <button class="btn btn-default" type="button" 
+            ng-click="displayModel(sheet,null,null,null,$index,false)">
+            <i class="glyphicon glyphicon-remove"></i>
+          </button>
+        </div>
+      </td>
+    </tr>
+
+    <!-- Thursday task list -->
+    <tr>
+      <th rowspan='{{timesheets[3].length + 1}}'>{{ days[3] }}</th>
+    </tr>
+
+    <tr ng-repeat = "sheet in timesheets[3]">
+      <td>
+        <div id="displayThursdayCustomer{{$index}}">{{sheet.customerName}}</div>
+        <div id="editThursdayCustomer{{$index}}" style="display:none;">
+          <select class="form-control" ng-model="thursdayCustomer"
+            ng-init = "thursdayCustomer = findCustomer(sheet.customerId)"
+            ng-options="c.customerName for c in customers" 
+            ng-change="onChangeCustomer(sheet, thursdayCustomer)" required>
+          </select>
+        </div>
+      </td>
+
+      <td>
+        <div id="displayThursdayProject{{$index}}">{{sheet.projectName}}</div>
+        <div id="editThursdayProject{{$index}}" style="display:none;">
+          <select class="form-control" ng-model="thursdayProject" name="thursdayProject{{$index}}"
+            ng-init = "thursdayProject = findProject(sheet.customerId, sheet.projectId)"
+            ng-options="p.projectName for p in findCustomer(sheet.customerId).projects" required>
+            <option value="">-- choose project --</option>
+          </select>
+        </div>
+      </td>
+
+      <td>
+        <div id="displayThursdayHour{{$index}}">{{sheet.hour}}</div>
+        <div id="editThursdayHour{{$index}}" style="display:none;">
+          <input type="number" class="form-control" ng-model="thursdayHour"
+            placeholder="Hour" min="0" max="8" step="0.5" value="{{sheet.hour}}" required />
+        </div>
+      </td>
+
+      <td style="white-space: nowrap">
+        <div class="buttons" id="displayThursdayButtons{{$index}}">
+          <button class="btn btn-primary" ng-click="editModel(sheet, $index)">Edit</button>
+          <button class="btn btn-danger" ng-click="removeSheet(3, $index)">Delete</button>
+        </div>  
+        <div class="buttons" style="display:none;" id="editThursdayButtons{{$index}}">
+          <button class="btn btn-primary" type="button" 
+            ng-click="displayModel(sheet,thursdayCustomer,thursdayProject,thursdayHour,$index,true)">
+            <i class="glyphicon glyphicon-ok"></i>
+          </button>
+          <button class="btn btn-default" type="button" 
+            ng-click="displayModel(sheet,null,null,null,$index,false)">
+            <i class="glyphicon glyphicon-remove"></i>
+          </button>
+        </div>
+      </td>
+    </tr>
+
+    <!-- Friday task list -->
+    <tr>
+      <th rowspan='{{timesheets[4].length + 1}}'>{{ days[4] }}</th>
+    </tr>
+
+    <tr ng-repeat = "sheet in timesheets[4]">
+      <td>
+        <div id="displayFridayCustomer{{$index}}">{{sheet.customerName}}</div>
+        <div id="editFridayCustomer{{$index}}" style="display:none;">
+          <select class="form-control" ng-model="fridayCustomer"
+            ng-init = "fridayCustomer = findCustomer(sheet.customerId)"
+            ng-options="c.customerName for c in customers" 
+            ng-change="onChangeCustomer(sheet, fridayCustomer)" required>
+          </select>
+        </div>
+      </td>
+
+      <td>
+        <div id="displayFridayProject{{$index}}">{{sheet.projectName}}</div>
+        <div id="editFridayProject{{$index}}" style="display:none;">
+          <select class="form-control" ng-model="fridayProject" name="fridayProject{{$index}}"
+            ng-init = "fridayProject = findProject(sheet.customerId, sheet.projectId)"
+            ng-options="p.projectName for p in findCustomer(sheet.customerId).projects" required>
+            <option value="">-- choose project --</option>
+          </select>
+        </div>
+      </td>
+
+      <td>
+        <div id="displayFridayHour{{$index}}">{{sheet.hour}}</div>
+        <div id="editFridayHour{{$index}}" style="display:none;">
+          <input type="number" class="form-control" ng-model="fridayHour"
+            placeholder="Hour" min="0" max="8" step="0.5" value="{{sheet.hour}}" required />
+        </div>
+      </td>
+
+      <td style="white-space: nowrap">
+        <div class="buttons" id="displayFridayButtons{{$index}}">
+          <button class="btn btn-primary" ng-click="editModel(sheet, $index)">Edit</button>
+          <button class="btn btn-danger" ng-click="removeSheet(4, $index)">Delete</button>
+        </div>  
+        <div class="buttons" style="display:none;" id="editFridayButtons{{$index}}">
+          <button class="btn btn-primary" type="button" 
+            ng-click="displayModel(sheet,fridayCustomer,fridayProject,fridayHour,$index,true)">
+            <i class="glyphicon glyphicon-ok"></i>
+          </button>
+          <button class="btn btn-default" type="button" 
+            ng-click="displayModel(sheet,null,null,null,$index,false)">
+            <i class="glyphicon glyphicon-remove"></i>
+          </button>
+        </div>
+      </td>
+    </tr>
   </table>
 
 </div>

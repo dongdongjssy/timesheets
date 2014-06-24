@@ -3,10 +3,17 @@
 /* Controllers */
 var timesheetsControllers = angular.module('timesheetsApp.controllers', []);
 
-/********************
- * Login Controller *
- ********************/
+/************************* Login Controller *************************/
  var LoginController = function($scope, $location, $modal, UserService) {
+ 	function onSuccessfulLogin() {
+ 		window.location = '#/overview';
+ 	}
+
+ 	function onFailedLogin() {
+ 		$scope.loginEmailError = "Account not exist or wrong password";
+		return;
+ 	}
+
  	$scope.login = function() {
 		// clear error
 		$scope.loginEmailError = null;
@@ -32,14 +39,7 @@ var timesheetsControllers = angular.module('timesheetsApp.controllers', []);
 			return;
 		}
 
-		var user = UserService.authenticate(email, password);
-		console.log(user);
-		if(!user.isAuthenticated) {
-			$scope.loginEmailError = "Account not exist or wrong password";
-			return;
-		}
-
-		window.location = '#/overview';
+		UserService.authenticate(email, password, onSuccessfulLogin, onFailedLogin);
 	}
 
 	$scope.openCreateAccountModal = function() {
@@ -93,16 +93,14 @@ var timesheetsControllers = angular.module('timesheetsApp.controllers', []);
 	};
 };
 
-/*******************
- * Main Controller *
- *******************/
-var MainController = function ($scope, $filter, $http, $location, UserService, DataService) {
+/************************* Main Controller *************************/
+var MainController = function ($scope, $cookieStore, $location, DataService) {
 	// populate data for application
 	DataService.populateData($scope);	
 
 	// user authentication
-	var user = UserService.getUserData();
-	if(!user.isAuthenticated) {
+	var user = $cookieStore.get('userData');
+	if(!user || !user.isAuthenticated) {
 		window.location = "#/login";
 	} else {
 		$scope.user = user;
@@ -110,7 +108,7 @@ var MainController = function ($scope, $filter, $http, $location, UserService, D
 
 	// user log out
 	$scope.logout = function () {
-		user.isAuthenticated = false;
+		$cookieStore.remove('userData');
 		window.location = "#/login";
 	};
 
@@ -140,6 +138,12 @@ var MainController = function ($scope, $filter, $http, $location, UserService, D
 
   	$scope.timesheets[$('#addsheetDay').val()].push(newsheet);
   	/* T.B.D: Add to database */
+  };
+
+  // delete a sheet
+  $scope.removeSheet = function(day, index) {
+  	/* T.B.D: remove frome database */
+  	$scope.timesheets[day].splice(index, 1);
   };
 
 	// toggle between edit and display model
@@ -182,12 +186,6 @@ var MainController = function ($scope, $filter, $http, $location, UserService, D
 		});
 	};
 
-	// delete a sheet
-  $scope.removeSheet = function(day, index) {
-  	/* T.B.D: remove frome database */
-  	$scope.timesheets[day].splice(index, 1);
-  };
-
   // setting dropdown while change to edit model.
   $scope.findCustomer = function(customerId) {
   	for(var i=0; i<$scope.customers.length; i++) {
@@ -217,17 +215,18 @@ var MainController = function ($scope, $filter, $http, $location, UserService, D
   	return projects[0];
   }
 
+  // change projects content while changing customer
   $scope.onChangeCustomer = function(sheet, customer) {
   	sheet.customerId = customer.customerId;
   	sheet.customerName = customer.customerName;
   };
 };
 
-// Register controllers
+/************************* Register controllers *************************/
 timesheetsControllers.controller(
 	'LoginController', 
 	['$scope', '$location', '$modal', 'UserService', LoginController]);
 
 timesheetsControllers.controller(
 	'MainController', 
-	['$scope', '$filter', '$http', '$location', 'UserService', 'DataService', MainController]);
+	['$scope', '$cookieStore', '$location', 'DataService', MainController]);
