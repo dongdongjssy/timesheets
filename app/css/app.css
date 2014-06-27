@@ -188,6 +188,12 @@ body {
   font-weight: bold;
 }
 
+.sidebar-header {
+  color: #707070;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #dddddd;
+}
+
 /* main section */
 .main {
   padding: 20px;

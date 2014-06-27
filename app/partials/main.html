@@ -39,35 +39,60 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-sm-3 col-md-2 sidebar">
+      <!-- Navigation -->
+      <h5 class="sidebar-header">Navigation</h4>
       <ul class="nav nav-sidebar">
-        <li ng-class="navClass('overview')">
-          <a href="#/overview">
+        <li ng-class="navClass('main/overview')">
+          <a ui-sref=".overview">
             <span class="glyphicon glyphicon-home"></span>
             <span class="title-side-nav">Overview</span>
           </a>
         </li>
-        <li ng-class="navClass('reports')">
-          <a href="#/reports">
+        <li ng-class="navClass('main/reports')">
+          <a ui-sref=".reports">
             <i class="glyphicon glyphicon-list-alt"></i>
             <span class="title-side-nav">Reports</span>
           </a>
         </li>
-        <li ng-class="navClass('analytics')">
-          <a href="#/analytics">
+        <li ng-class="navClass('main/analytics')">
+          <a ui-sref=".analytics">
             <i class="glyphicon glyphicon-stats"></i>
             <span class="title-side-nav">Analytics</span>
           </a>
         </li>
-        <li ng-class="navClass('export')">
-          <a href="#/export">
+        <li ng-class="navClass('main/export')">
+          <a ui-sref=".export">
             <i class="glyphicon glyphicon-export"></i>
             <span class="title-side-nav">Export</span>
           </a>
         </li>
       </ul>
+      <br/>
+      <!-- Management -->
+      <h5 class="sidebar-header">Management</h5>
+      <ul class="nav nav-sidebar">
+        <li ng-class="navClass('main/users')">
+          <a ui-sref=".users">
+            <span class="glyphicon glyphicon-user"></span>
+            <span class="title-side-nav">Users</span>
+          </a>
+        </li>
+        <li ng-class="navClass('main/customers')">
+          <a ui-sref=".customers">
+            <i class="glyphicon glyphicon-globe"></i>
+            <span class="title-side-nav">Customers</span>
+          </a>
+        </li>
+        <li ng-class="navClass('main/projects')">
+          <a ui-sref=".projects">
+            <i class="glyphicon glyphicon-tasks"></i>
+            <span class="title-side-nav">Projects</span>
+          </a>
+        </li>
+      </ul>
     </div>
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-      <div ng-include="template.url"></idv>
+      <div ui-view></idv>
     </div>
   </div>
 </div>

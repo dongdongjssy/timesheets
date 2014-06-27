@@ -9,9 +9,9 @@ $(document).ready(function(){
 
 // Declare app level module which depends on filters, and services
 var timesheetsApp = angular.module('timesheetsApp', [
-	'ngRoute',
   'ngCookies',
   'ngAnimate',
+  'ui.router',
 	'ui.bootstrap',
 	'timesheetsApp.filters',
 	'timesheetsApp.services',
@@ -63,29 +63,55 @@ var timesheetsApp = angular.module('timesheetsApp', [
   }];
 });
 
-timesheetsApp.config(['$routeProvider', 
-	function($routeProvider) {
-		$routeProvider
-		.when('/login', {
-			templateUrl: 'partials/login.html', 
-			controller: 'LoginController'
-		})
-    .when('/overview', {
-      templateUrl: 'partials/main.html', 
-      controller: 'MainController'
-    })
-    .when('/reports', {
-      templateUrl: 'partials/main.html', 
-      controller: 'MainController'
-    })
-    .when('/analytics', {
-      templateUrl: 'partials/main.html', 
-      controller: 'MainController'
-    })
-    .when('/export', {
-      templateUrl: 'partials/main.html', 
-      controller: 'MainController'
-    })
-		.otherwise({redirectTo: '/login'});
+timesheetsApp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
+	function($stateProvider, $urlRouterProvider, $locationProvider) {
+    $urlRouterProvider.otherwise('/login');
+
+    $stateProvider
+      .state('login', {
+        url: '/login',
+        templateUrl: 'partials/login.html',
+        controller: 'LoginController'
+      })
+      .state('main', {
+        url: '/main',
+        templateUrl: 'partials/main.html',
+        controller: 'MainController'
+      })
+      .state('main.overview', {
+        url: '/overview',
+        templateUrl: 'partials/main-overview.html',
+        controller: 'MainController'
+      })
+      .state('main.analytics', {
+        url: '/analytics',
+        templateUrl: 'partials/main-analytics.html',
+        controller: 'MainController'
+      })
+      .state('main.reports', {
+        url: '/reports',
+        templateUrl: 'partials/main-reports.html',
+        controller: 'MainController'
+      })
+      .state('main.export', {
+        url: '/export',
+        templateUrl: 'partials/main-export.html',
+        controller: 'MainController'
+      })
+      .state('main.users', {
+        url: '/users',
+        templateUrl: 'partials/admin-users.html',
+        controller: 'AdminController'
+      })
+      .state('main.customers', {
+        url: '/customers',
+        templateUrl: 'partials/admin-customers.html',
+        controller: 'AdminController'
+      })
+      .state('main.projects', {
+        url: '/projects',
+        templateUrl: 'partials/admin-projects.html',
+        controller: 'AdminController'
+      });
 	}
 ]);

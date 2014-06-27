@@ -4,9 +4,9 @@
 var timesheetsControllers = angular.module('timesheetsApp.controllers', []);
 
 /************************* Login Controller *************************/
- var LoginController = function($scope, $location, $modal, UserService) {
+ var LoginController = function($scope, $state, $location, $modal, UserService) {
  	function onSuccessfulLogin() {
- 		window.location = '#/overview';
+ 		$state.go('main.overview');
  	}
 
  	function onFailedLogin() {
@@ -94,14 +94,14 @@ var timesheetsControllers = angular.module('timesheetsApp.controllers', []);
 };
 
 /************************* Main Controller *************************/
-var MainController = function ($scope, $cookieStore, $location, DataService) {
+var MainController = function ($scope, $state, $cookieStore, $location, DataService) {
 	// populate data for application
 	DataService.populateData($scope);	
 
 	// user authentication
 	var user = $cookieStore.get('userData');
 	if(!user || !user.isAuthenticated) {
-		window.location = "#/login";
+		$state.go('login');
 	} else {
 		$scope.user = user;
 	}
@@ -109,19 +109,12 @@ var MainController = function ($scope, $cookieStore, $location, DataService) {
 	// user log out
 	$scope.logout = function () {
 		$cookieStore.remove('userData');
-		window.location = "#/login";
+		$state.go('login');
 	};
 
   // side bar navigation
 	$scope.navClass = function (page) {
-		var currentRoute = $location.path().substring(1) || 'overview';
-
-		$.each($scope.templates, function(index, obj){
-			if(obj.name == currentRoute) {
-				$scope.template = obj;
-			}
-		});
-
+		var currentRoute = $location.path().substring(1) || 'main/overview';
 		return page === currentRoute ? 'active' : '';
 	}
 
@@ -222,11 +215,17 @@ var MainController = function ($scope, $cookieStore, $location, DataService) {
   };
 };
 
-/************************* Register controllers *************************/
-timesheetsControllers.controller(
-	'LoginController', 
-	['$scope', '$location', '$modal', 'UserService', LoginController]);
+/************************* Admin controllers *************************/
+var AdminController = function($scope, DataService) {
 
-timesheetsControllers.controller(
-	'MainController', 
-	['$scope', '$cookieStore', '$location', 'DataService', MainController]);
+};
+
+/************************* Register controllers *************************/
+timesheetsControllers.controller('LoginController', 
+	['$scope', '$state', '$location', '$modal', 'UserService', LoginController]);
+
+timesheetsControllers.controller('MainController', 
+	['$scope', '$state', '$cookieStore', '$location', 'DataService', MainController]);
+
+timesheetsControllers.controller('AdminController', 
+	['$scope', 'DataService', AdminController]);
